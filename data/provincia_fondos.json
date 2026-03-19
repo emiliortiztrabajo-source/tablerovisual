@@ -1,0 +1,114 @@
+{
+  "ultima_actualizacion": "2026-03-19T00:38:57-03:00",
+  "fuente": "https://www.provinciafondos.com.ar/nuestros-fondos",
+  "fondos": [
+    {
+      "nombre_fondo": "1822 RAÍCES VALORES FIDUCIARIOS",
+      "numero_fondo": "9",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/pgzqbxx6azd042ya4vcg788r",
+      "valor_cuotaparte": 213.293765,
+      "variacion_diaria": 0.0596,
+      "fecha_dato": "2026-03-18",
+      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "moneda": "ARS",
+      "tipo": "TASA DE INTERÉS",
+      "clase_fondo": "U"
+    },
+    {
+      "nombre_fondo": "1822 RAÍCES AHORRO PLUS",
+      "numero_fondo": "14",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/rx6ogk3gkm5m5wbnhsfbbaj0",
+      "valor_cuotaparte": 1.749592,
+      "variacion_diaria": 0.0179,
+      "fecha_dato": "2026-03-18",
+      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "moneda": "ARS",
+      "tipo": "DEUDA RENTA FIJA",
+      "clase_fondo": "A"
+    },
+    {
+      "nombre_fondo": "1822 RAÍCES AHORRO PESOS",
+      "numero_fondo": "4",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/fx00gteu1ughpxmzrii6nb3q",
+      "valor_cuotaparte": 34.506432,
+      "variacion_diaria": 0.0626,
+      "fecha_dato": "2026-03-18",
+      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "moneda": "ARS",
+      "tipo": "MERCADO DE DINERO TRANSACCIONAL",
+      "clase_fondo": "U"
+    },
+    {
+      "nombre_fondo": "1822 RAÍCES RENTA EN PESOS",
+      "numero_fondo": "2",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/fed0ggj42lc86o8hk4p27kqf",
+      "valor_cuotaparte": 13229.092955,
+      "variacion_diaria": 0.0172,
+      "fecha_dato": "2026-03-18",
+      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "moneda": "ARS",
+      "tipo": "DEUDA RENTA FIJA",
+      "clase_fondo": "U"
+    },
+    {
+      "nombre_fondo": "1822 RAÍCES VALORES NEGOCIABLES",
+      "numero_fondo": "1",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/kdddydmr1kqalu395pxaoudz",
+      "valor_cuotaparte": 24902.349264,
+      "variacion_diaria": 1.1549,
+      "fecha_dato": "2026-03-18",
+      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "moneda": "ARS",
+      "tipo": "ACCIONES RENTA VARIABLE",
+      "clase_fondo": "U"
+    },
+    {
+      "nombre_fondo": "1822 RAÍCES PyME",
+      "numero_fondo": "3",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/rmnnb1f6s9tfxyiy7hwpv35m",
+      "valor_cuotaparte": 8701.173102,
+      "variacion_diaria": 0.054,
+      "fecha_dato": "2026-03-18",
+      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "moneda": "ARS",
+      "tipo": "FINANCIAMIENTO PRODUCTIVO VARIABLE",
+      "clase_fondo": "U"
+    },
+    {
+      "nombre_fondo": "1822 RAÍCES INVERSIÓN",
+      "numero_fondo": "10",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/lr5gmxx67bt3pogqyere7nyu",
+      "valor_cuotaparte": 89.431195,
+      "variacion_diaria": 0.0255,
+      "fecha_dato": "2026-03-18",
+      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "moneda": "ARS",
+      "tipo": "DEUDA RENTA FIJA",
+      "clase_fondo": "U"
+    },
+    {
+      "nombre_fondo": "1822 RAÍCES INFRAESTRUCTURA",
+      "numero_fondo": "15",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/mhocjxdbhyyhhh44mrrgu47w",
+      "valor_cuotaparte": 7.059711,
+      "variacion_diaria": -0.0042,
+      "fecha_dato": "2026-03-18",
+      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "moneda": "ARS",
+      "tipo": "FINANCIAMIENTO PRODUCTIVO VARIABLE",
+      "clase_fondo": "U"
+    },
+    {
+      "nombre_fondo": "1822 RAÍCES DÓLARES PLUS",
+      "numero_fondo": "12",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/pnlxvgys0ytcff8sx5hmozq2",
+      "valor_cuotaparte": 1.265363,
+      "variacion_diaria": -0.1208,
+      "fecha_dato": "2026-03-18",
+      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "moneda": "USD",
+      "tipo": "DEUDA RENTA FIJA",
+      "clase_fondo": "A"
+    }
+  ]
+}
