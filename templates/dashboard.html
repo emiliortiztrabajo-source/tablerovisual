@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Financiero Argentina</title>
+    <title>Centro de Monitoreo Pilar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 </head>
@@ -13,44 +13,23 @@
         <div class="container executive-container">
             <header class="dashboard-header">
                 <div>
-                    <p class="eyebrow mb-1">Executive summary</p>
-                    <h1 class="dashboard-title mb-1">Dashboard Financiero Argentina</h1>
-                    <p class="dashboard-subtitle mb-0">Dólar blue, inflación, combustibles, ADRs y fondos en una sola vista compacta.</p>
+                    <p class="eyebrow mb-1">Municipio de Pilar</p>
+                    <h1 class="dashboard-title mb-1">Centro de Monitoreo Pilar</h1>
+                    <p class="dashboard-subtitle mb-0">Sistema de monitoreo económico y contextual del Municipio de Pilar.</p>
                 </div>
                 <div class="header-chip-group">
                     <div class="glass-chip">
                         <span>Actualización general</span>
                         <strong>{% if general_last_update %}{{ general_last_update|date:"d/m/Y H:i" }}{% else %}-{% endif %}</strong>
                     </div>
+                    <form method="post" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button">Cerrar sesión</button>
+                    </form>
                 </div>
             </header>
 
-            <section class="control-bar panel-card">
-                <form method="get" class="filters-inline">
-                    <div class="filter-block">
-                        <label class="filter-label" for="empresa">Empresa combustibles</label>
-                        <select class="form-select compact-select" id="empresa" name="empresa" onchange="this.form.submit()">
-                            {% for company in companies %}
-                                <option value="{{ company }}" {% if company == selected_company %}selected{% endif %}>{{ company }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="filter-block">
-                        <label class="filter-label" for="provincia">Provincia</label>
-                        <select class="form-select compact-select" id="provincia" name="provincia" onchange="this.form.submit()">
-                            {% for province_value, province_label in provinces %}
-                                <option value="{{ province_value }}" {% if province_value == selected_province %}selected{% endif %}>{{ province_label }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="filter-meta">
-                        <span>Fuente combustibles</span>
-                        <strong>{{ fuels.source }}</strong>
-                    </div>
-                </form>
-            </section>
-
-            <section class="kpi-grid">
+            <section class="kpi-grid kpi-grid-seven">
                 <div class="kpi-card compact-kpi">
                     <span class="kpi-label">Dólar blue compra</span>
                     <h2 class="kpi-value">$ {{ dollar.buy_value|floatformat:2 }}</h2>
@@ -69,23 +48,21 @@
                 </div>
                 <div class="kpi-card compact-kpi">
                     <span class="kpi-label">Nafta súper</span>
-                    <h2 class="kpi-value">$ {{ fuels.super.value|default:0|floatformat:2 }}</h2>
-                    <p class="kpi-foot mb-0">{{ selected_company }} · {{ selected_province }}</p>
+                    <div class="fuel-chip" id="fuelCompanyChip">Combustibles: {{ fuels.empresa|default:"N/D" }}</div>
+                    <h2 class="kpi-value fuel-value" id="fuelSuperValue">{% if fuels.super is not None %}$ {{ fuels.super|floatformat:2 }}{% else %}N/D{% endif %}</h2>
+                    <p class="kpi-foot mb-0" id="fuelPremiumValue">Premium: {% if fuels.premium is not None %}$ {{ fuels.premium|floatformat:2 }}{% else %}N/D{% endif %}</p>
                 </div>
                 <div class="kpi-card compact-kpi">
                     <span class="kpi-label">Gasoil</span>
-                    <h2 class="kpi-value">$ {{ fuels.gasoil.value|default:0|floatformat:2 }}</h2>
-                    <p class="kpi-foot mb-0">{{ selected_company }} · {{ selected_province }}</p>
+                    <h2 class="kpi-value fuel-value" id="fuelGasoilValue">{% if fuels.gasoil is not None %}$ {{ fuels.gasoil|floatformat:2 }}{% else %}N/D{% endif %}</h2>
+                    <p class="kpi-foot mb-0" id="fuelMetaValue">{{ fuels.provincia|default:"Buenos Aires" }} · {{ fuels.fuente|default:"N/D" }}</p>
                 </div>
                 <div class="kpi-card compact-kpi">
-                    <span class="kpi-label">Fondos procesados</span>
-                    <h2 class="kpi-value">{{ provincia_fondos.summary.count }}</h2>
-                    <p class="kpi-foot mb-0">Provincia Fondos</p>
-                </div>
-                <div class="kpi-card compact-kpi">
-                    <span class="kpi-label">Última actualización</span>
-                    <h2 class="kpi-value smaller-value">{% if general_last_update %}{{ general_last_update|date:"H:i" }}{% else %}-{% endif %}</h2>
-                    <p class="kpi-foot mb-0">{% if general_last_update %}{{ general_last_update|date:"d/m/Y" }}{% else %}Sin datos{% endif %}</p>
+                    <span class="kpi-label">Variación dólar blue</span>
+                    <h2 class="kpi-value {% if dollar.variation_daily >= 0 %}trend-positive{% else %}trend-negative{% endif %}">
+                        {{ dollar.variation_daily|floatformat:2 }}%
+                    </h2>
+                    <p class="kpi-foot mb-0">Actualizado: {{ dollar.last_update|date:"H:i" }}</p>
                 </div>
             </section>
 
@@ -119,15 +96,15 @@
                     <div class="summary-header">
                         <div>
                             <h3 class="panel-title mb-1">Fondos Provincia</h3>
-                            <p class="panel-subtitle mb-0">Resumen de cuotaparte y variación.</p>
+                            <p class="panel-subtitle mb-0">RAÍCES INVERSIÓN priorizado y visible primero.</p>
                         </div>
                         <a class="summary-link" href="#detalle-fondos">Ver tabla completa</a>
                     </div>
                     <div class="summary-list">
                         {% for fondo in top_fondos_resumen %}
-                            <div class="summary-row">
+                            <div class="summary-row {% if fondo.is_priority %}priority-fund{% endif %}">
                                 <div>
-                                    <strong>{{ fondo.nombre_fondo|truncatechars:28 }}</strong>
+                                    <strong>{{ fondo.nombre_fondo|truncatechars:30 }}</strong>
                                     <span>$ {{ fondo.valor_cuotaparte|default:0|floatformat:4 }}</span>
                                 </div>
                                 <strong class="{% if fondo.variacion_diaria >= 0 %}trend-positive{% else %}trend-negative{% endif %}">
@@ -138,6 +115,35 @@
                             <p class="empty-state mb-0">No hay fondos para resumir.</p>
                         {% endfor %}
                     </div>
+                </div>
+            </section>
+
+            <section class="panel-card news-panel">
+                <div class="summary-header mb-3">
+                    <div>
+                        <h3 class="panel-title mb-1">Radar Pilar</h3>
+                        <p class="panel-subtitle mb-0">Contexto local reciente para una lectura ejecutiva rápida.</p>
+                    </div>
+                    <div class="news-meta">
+                        <span>{{ noticias_count }} noticias</span>
+                        <span>Tema dominante: {{ tema_dominante|title }}</span>
+                        <span>{% if ultima_actualizacion_noticias %}{{ ultima_actualizacion_noticias|date:"d/m H:i" }}{% else %}-{% endif %}</span>
+                    </div>
+                </div>
+                <div class="news-grid">
+                    {% for noticia in noticias_pilar %}
+                        <article class="news-card">
+                            <div class="news-card-top">
+                                <span class="news-badge">{{ noticia.tema|title }}</span>
+                                <span class="news-source">{{ noticia.fuente }}{% if noticia.fecha_publicacion %} · {{ noticia.fecha_publicacion }}{% endif %}</span>
+                            </div>
+                            <h4 class="news-title">{{ noticia.titulo }}</h4>
+                            <p class="news-summary">{{ noticia.resumen_corto }}</p>
+                            <a href="{{ noticia.url }}" target="_blank" rel="noopener noreferrer" class="summary-link">Abrir nota</a>
+                        </article>
+                    {% empty %}
+                        <p class="empty-state mb-0">No hay noticias disponibles para Radar Pilar.</p>
+                    {% endfor %}
                 </div>
             </section>
 
@@ -205,7 +211,7 @@
                                     </thead>
                                     <tbody>
                                         {% for fondo in provincia_fondos.items %}
-                                            <tr>
+                                            <tr class="{% if fondo.is_priority %}priority-fund-row{% endif %}">
                                                 <td>
                                                     {% if fondo.url_fondo %}
                                                         <a href="{{ fondo.url_fondo }}" target="_blank" rel="noopener noreferrer" class="table-link">
@@ -252,12 +258,14 @@
 
     {{ inflation.chart_labels|json_script:"ipc-labels" }}
     {{ inflation.chart_values|json_script:"ipc-values" }}
+    {{ fuel_companies|json_script:"fuel-companies-data" }}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script>
         const ipcLabels = JSON.parse(document.getElementById("ipc-labels").textContent);
         const ipcValues = JSON.parse(document.getElementById("ipc-values").textContent);
+        const fuelCompanies = JSON.parse(document.getElementById("fuel-companies-data").textContent);
 
         const ctx = document.getElementById("ipcChart");
         new Chart(ctx, {
@@ -267,8 +275,8 @@
                 datasets: [{
                     label: "IPC mensual",
                     data: ipcValues,
-                    borderColor: "#59c7b3",
-                    backgroundColor: "rgba(89, 199, 179, 0.14)",
+                    borderColor: "#38bdf8",
+                    backgroundColor: "rgba(56, 189, 248, 0.16)",
                     fill: true,
                     tension: 0.35,
                     pointRadius: 3,
@@ -300,6 +308,54 @@
                 }
             }
         });
+
+        const fuelCompanyChip = document.getElementById("fuelCompanyChip");
+        const fuelSuperValue = document.getElementById("fuelSuperValue");
+        const fuelPremiumValue = document.getElementById("fuelPremiumValue");
+        const fuelGasoilValue = document.getElementById("fuelGasoilValue");
+        const fuelMetaValue = document.getElementById("fuelMetaValue");
+
+        function formatFuelValue(value) {
+            return value === null || value === undefined ? "N/D" : `$ ${Number(value).toFixed(2)}`;
+        }
+
+        function renderFuelCompany(company) {
+            if (!company) {
+                return;
+            }
+
+            fuelCompanyChip.classList.add("fuel-fade");
+            fuelSuperValue.classList.add("fuel-fade");
+            fuelPremiumValue.classList.add("fuel-fade");
+            fuelGasoilValue.classList.add("fuel-fade");
+            fuelMetaValue.classList.add("fuel-fade");
+
+            window.setTimeout(() => {
+                fuelCompanyChip.textContent = `Combustibles: ${company.empresa || "N/D"}`;
+                fuelSuperValue.textContent = formatFuelValue(company.super);
+                fuelPremiumValue.textContent = `Premium: ${formatFuelValue(company.premium)}`;
+                fuelGasoilValue.textContent = formatFuelValue(company.gasoil);
+                fuelMetaValue.textContent = `${company.provincia || "Buenos Aires"} · ${company.fuente || "N/D"}`;
+
+                fuelCompanyChip.classList.remove("fuel-fade");
+                fuelSuperValue.classList.remove("fuel-fade");
+                fuelPremiumValue.classList.remove("fuel-fade");
+                fuelGasoilValue.classList.remove("fuel-fade");
+                fuelMetaValue.classList.remove("fuel-fade");
+            }, 180);
+        }
+
+        if (fuelCompanies.length > 0) {
+            let currentFuelIndex = 0;
+            renderFuelCompany(fuelCompanies[currentFuelIndex]);
+
+            if (fuelCompanies.length > 1) {
+                window.setInterval(() => {
+                    currentFuelIndex = (currentFuelIndex + 1) % fuelCompanies.length;
+                    renderFuelCompany(fuelCompanies[currentFuelIndex]);
+                }, 5000);
+            }
+        }
     </script>
 </body>
 </html>
