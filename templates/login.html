@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso | Centro de Monitoreo Pilar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body class="login-page">
+    <main class="login-shell">
+        <section class="login-card">
+            <div class="login-brand">
+                <p class="eyebrow mb-2">Municipio de Pilar</p>
+                <h1 class="login-title mb-2">Centro de Monitoreo Pilar</h1>
+                <p class="login-subtitle mb-0">Acceso seguro al sistema de monitoreo económico y contextual.</p>
+            </div>
+
+            {% if form.errors %}
+                <div class="login-alert" role="alert">
+                    Usuario o contraseña incorrectos. Revisá los datos e intentá nuevamente.
+                </div>
+            {% endif %}
+
+            {% if next %}
+                <div class="login-note">
+                    Iniciá sesión para acceder al panel.
+                </div>
+            {% endif %}
+
+            <form method="post" class="login-form">
+                {% csrf_token %}
+                <div class="login-field">
+                    <label for="id_username" class="login-label">Usuario</label>
+                    <input
+                        type="text"
+                        name="username"
+                        id="id_username"
+                        class="login-input"
+                        autocomplete="username"
+                        required
+                        autofocus
+                    >
+                </div>
+
+                <div class="login-field">
+                    <label for="id_password" class="login-label">Contraseña</label>
+                    <input
+                        type="password"
+                        name="password"
+                        id="id_password"
+                        class="login-input"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <input type="hidden" name="next" value="{{ next|default:'/' }}">
+
+                <button type="submit" class="login-submit">Ingresar</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
