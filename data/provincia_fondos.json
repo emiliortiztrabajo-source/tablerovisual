@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-03-19T00:38:57-03:00",
+  "ultima_actualizacion": "2026-03-19T13:43:12-03:00",
   "fuente": "https://www.provinciafondos.com.ar/nuestros-fondos",
   "fondos": [
     {
@@ -9,7 +9,7 @@
       "valor_cuotaparte": 213.293765,
       "variacion_diaria": 0.0596,
       "fecha_dato": "2026-03-18",
-      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "fecha_scraping": "2026-03-19T13:43:12-03:00",
       "moneda": "ARS",
       "tipo": "TASA DE INTERÉS",
       "clase_fondo": "U"
@@ -21,7 +21,7 @@
       "valor_cuotaparte": 1.749592,
       "variacion_diaria": 0.0179,
       "fecha_dato": "2026-03-18",
-      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "fecha_scraping": "2026-03-19T13:43:12-03:00",
       "moneda": "ARS",
       "tipo": "DEUDA RENTA FIJA",
       "clase_fondo": "A"
@@ -33,7 +33,7 @@
       "valor_cuotaparte": 34.506432,
       "variacion_diaria": 0.0626,
       "fecha_dato": "2026-03-18",
-      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "fecha_scraping": "2026-03-19T13:43:12-03:00",
       "moneda": "ARS",
       "tipo": "MERCADO DE DINERO TRANSACCIONAL",
       "clase_fondo": "U"
@@ -45,7 +45,7 @@
       "valor_cuotaparte": 13229.092955,
       "variacion_diaria": 0.0172,
       "fecha_dato": "2026-03-18",
-      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "fecha_scraping": "2026-03-19T13:43:12-03:00",
       "moneda": "ARS",
       "tipo": "DEUDA RENTA FIJA",
       "clase_fondo": "U"
@@ -57,7 +57,7 @@
       "valor_cuotaparte": 24902.349264,
       "variacion_diaria": 1.1549,
       "fecha_dato": "2026-03-18",
-      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "fecha_scraping": "2026-03-19T13:43:12-03:00",
       "moneda": "ARS",
       "tipo": "ACCIONES RENTA VARIABLE",
       "clase_fondo": "U"
@@ -69,7 +69,7 @@
       "valor_cuotaparte": 8701.173102,
       "variacion_diaria": 0.054,
       "fecha_dato": "2026-03-18",
-      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "fecha_scraping": "2026-03-19T13:43:12-03:00",
       "moneda": "ARS",
       "tipo": "FINANCIAMIENTO PRODUCTIVO VARIABLE",
       "clase_fondo": "U"
@@ -81,7 +81,7 @@
       "valor_cuotaparte": 89.431195,
       "variacion_diaria": 0.0255,
       "fecha_dato": "2026-03-18",
-      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "fecha_scraping": "2026-03-19T13:43:12-03:00",
       "moneda": "ARS",
       "tipo": "DEUDA RENTA FIJA",
       "clase_fondo": "U"
@@ -93,7 +93,7 @@
       "valor_cuotaparte": 7.059711,
       "variacion_diaria": -0.0042,
       "fecha_dato": "2026-03-18",
-      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "fecha_scraping": "2026-03-19T13:43:12-03:00",
       "moneda": "ARS",
       "tipo": "FINANCIAMIENTO PRODUCTIVO VARIABLE",
       "clase_fondo": "U"
@@ -105,7 +105,7 @@
       "valor_cuotaparte": 1.265363,
       "variacion_diaria": -0.1208,
       "fecha_dato": "2026-03-18",
-      "fecha_scraping": "2026-03-19T00:38:57-03:00",
+      "fecha_scraping": "2026-03-19T13:43:12-03:00",
       "moneda": "USD",
       "tipo": "DEUDA RENTA FIJA",
       "clase_fondo": "A"
