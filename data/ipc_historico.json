@@ -1,0 +1,80 @@
+{
+  "ultima_actualizacion": "2026-03-19T13:42:50-03:00",
+  "fuente": "Datos Argentina / INDEC",
+  "fuente_url": "https://apis.datos.gob.ar/series/api/series/?ids=145.3_INGNACNAL_DICI_M_15,145.3_INGNACUAL_DICI_M_38",
+  "serie": [
+    {
+      "periodo": "2024-04",
+      "label": "Abr 2024",
+      "valor_mensual": 8.83,
+      "variacion_interanual": 289.4
+    },
+    {
+      "periodo": "2024-05",
+      "label": "May 2024",
+      "valor_mensual": 4.2,
+      "variacion_interanual": 276.41
+    },
+    {
+      "periodo": "2024-06",
+      "label": "Jun 2024",
+      "valor_mensual": 4.58,
+      "variacion_interanual": 271.53
+    },
+    {
+      "periodo": "2024-07",
+      "label": "Jul 2024",
+      "valor_mensual": 4.03,
+      "variacion_interanual": 263.45
+    },
+    {
+      "periodo": "2024-08",
+      "label": "Ago 2024",
+      "valor_mensual": 4.17,
+      "variacion_interanual": 236.72
+    },
+    {
+      "periodo": "2024-09",
+      "label": "Sep 2024",
+      "valor_mensual": 3.47,
+      "variacion_interanual": 209.0
+    },
+    {
+      "periodo": "2024-10",
+      "label": "Oct 2024",
+      "valor_mensual": 2.69,
+      "variacion_interanual": 192.99
+    },
+    {
+      "periodo": "2024-11",
+      "label": "Nov 2024",
+      "valor_mensual": 2.43,
+      "variacion_interanual": 166.03
+    },
+    {
+      "periodo": "2024-12",
+      "label": "Dic 2024",
+      "valor_mensual": 2.7,
+      "variacion_interanual": 117.76
+    },
+    {
+      "periodo": "2025-01",
+      "label": "Ene 2025",
+      "valor_mensual": 2.21,
+      "variacion_interanual": 84.54
+    },
+    {
+      "periodo": "2025-02",
+      "label": "Feb 2025",
+      "valor_mensual": 2.4,
+      "variacion_interanual": 66.87
+    },
+    {
+      "periodo": "2025-03",
+      "label": "Mar 2025",
+      "valor_mensual": 3.73,
+      "variacion_interanual": 55.93
+    }
+  ],
+  "year_over_year": 55.93
+}

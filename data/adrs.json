@@ -1,15 +1,15 @@
 {
-  "ultima_actualizacion": "2026-03-19T12:56:53-03:00",
+  "ultima_actualizacion": "2026-03-19T13:42:48-03:00",
   "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
   "adrs": [
     {
       "empresa": "Ypf",
       "ticker": "YPF",
       "ticker_local": "YPFDD",
-      "precio_actual": 43.14,
-      "variacion_diaria": 5.37,
+      "precio_actual": 43.32,
+      "variacion_diaria": 5.81,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 41.1,
       "cierre_anterior": 40.94,
@@ -22,76 +22,76 @@
       "precio_actual": 4.42,
       "variacion_diaria": 1.49,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 4.23,
       "cierre_anterior": 4.36,
-      "monto_operado": 162.532
+      "monto_operado": 205.787
     },
     {
       "empresa": "Banco Macro",
       "ticker": "BMA",
       "ticker_local": "BMA.D",
-      "precio_actual": 7.05,
-      "variacion_diaria": 2.47,
+      "precio_actual": 7.14,
+      "variacion_diaria": 3.77,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 7.0,
       "cierre_anterior": 6.88,
-      "monto_operado": 26.923
+      "monto_operado": 60.747
     },
     {
       "empresa": "Grupo Supervielle S.A.",
       "ticker": "SUPV",
       "ticker_local": "SUPVD",
-      "precio_actual": 1.71,
-      "variacion_diaria": 0.88,
+      "precio_actual": 1.73,
+      "variacion_diaria": 2.36,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 1.67,
       "cierre_anterior": 1.69,
-      "monto_operado": 6.558
+      "monto_operado": 19.329
     },
     {
       "empresa": "Bbva",
       "ticker": "BBAR",
       "ticker_local": "BBARD",
-      "precio_actual": 4.69,
-      "variacion_diaria": 3.76,
+      "precio_actual": 4.67,
+      "variacion_diaria": 3.31,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 4.47,
       "cierre_anterior": 4.52,
-      "monto_operado": 3.914
+      "monto_operado": 6.868
     },
     {
       "empresa": "Pampa Energía",
       "ticker": "PAM",
       "ticker_local": "PAMPD",
-      "precio_actual": 3.49,
-      "variacion_diaria": -0.99,
+      "precio_actual": 3.6,
+      "variacion_diaria": 2.12,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 3.52,
       "cierre_anterior": 3.53,
-      "monto_operado": 204.159
+      "monto_operado": 316.291
     },
     {
       "empresa": "Transportadora Gas Del Sur",
       "ticker": "TGS",
       "ticker_local": "TGSUD",
-      "precio_actual": 6.83,
-      "variacion_diaria": 2.24,
+      "precio_actual": 7.0,
+      "variacion_diaria": 4.79,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 6.68,
       "cierre_anterior": 6.68,
-      "monto_operado": 33.749
+      "monto_operado": 48.793
     },
     {
       "empresa": "Telecom Argentina",
@@ -100,7 +100,7 @@
       "precio_actual": 2.35,
       "variacion_diaria": 1.51,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 2.27,
       "cierre_anterior": 2.31,
@@ -110,27 +110,27 @@
       "empresa": "Cresud",
       "ticker": "CRESY",
       "ticker_local": "CRESD",
-      "precio_actual": 1.26,
-      "variacion_diaria": 4.13,
+      "precio_actual": 1.24,
+      "variacion_diaria": 2.47,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 1.21,
       "cierre_anterior": 1.21,
-      "monto_operado": 3.324
+      "monto_operado": 9.215
     },
     {
       "empresa": "Irsa",
       "ticker": "IRS",
       "ticker_local": "IRSAD",
-      "precio_actual": 1.49,
-      "variacion_diaria": 0.67,
+      "precio_actual": 1.51,
+      "variacion_diaria": 1.68,
       "moneda": "USD",
-      "fecha_actualizacion": "2026-03-19T12:56:53-03:00",
+      "fecha_actualizacion": "2026-03-19T13:42:48-03:00",
       "fuente": "https://iol.invertironline.com/mercado/cotizaciones/argentina",
       "apertura": 1.45,
       "cierre_anterior": 1.48,
-      "monto_operado": 650.0
+      "monto_operado": 1.088
     }
   ]
 }
