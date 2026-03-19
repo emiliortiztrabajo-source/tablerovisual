@@ -4,11 +4,15 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from services.adrs import get_dashboard_adrs
+from services.acciones_internacionales import get_dashboard_acciones_internacionales
 from services.combustibles import COMPANIES, DEFAULT_PROVINCE, get_dashboard_fuel_prices
 from services.dolar import get_dashboard_dollar_data
+from services.indec_precios import get_dashboard_indec_precios
 from services.ipc import get_dashboard_inflation_data
+from services.noticias_ipc import get_dashboard_noticias_ipc
 from services.noticias_pilar import get_dashboard_noticias_pilar
 from services.provincia_fondos import get_dashboard_provincia_fondos
+from services.riesgo_pais import get_dashboard_riesgo_pais
 
 
 PRIORITY_FUND_NAME = "1822 RAICES INVERSION"
@@ -66,8 +70,17 @@ def dashboard_view(request):
     fuel_companies = _build_fuel_companies()
     fuels = fuel_companies[0] if fuel_companies else None
     adrs = get_dashboard_adrs()
+    acciones_internacionales = get_dashboard_acciones_internacionales()
     provincia_fondos = get_dashboard_provincia_fondos()
+    indec_precios = get_dashboard_indec_precios()
+    riesgo_pais = get_dashboard_riesgo_pais()
     noticias_pilar = get_dashboard_noticias_pilar()
+    noticias_ipc = get_dashboard_noticias_ipc()
+    primary_ipc_interannual = noticias_ipc["dato_consolidado"]
+    primary_ipc_source = "Noticias relevantes"
+    if primary_ipc_interannual is None and inflation.get("year_over_year") is not None:
+        primary_ipc_interannual = float(inflation["year_over_year"])
+        primary_ipc_source = "Serie local"
 
     provincia_fondos["items"] = _mark_priority(
         _prioritize_raices_inversion(provincia_fondos["items"])
@@ -84,9 +97,13 @@ def dashboard_view(request):
     last_updates = [
         dollar.get("last_update"),
         inflation.get("last_update"),
+        riesgo_pais.get("last_update"),
         adrs.get("last_update"),
+        acciones_internacionales.get("last_update"),
         provincia_fondos["summary"].get("last_update"),
+        indec_precios.get("last_update"),
         noticias_pilar.get("last_update"),
+        noticias_ipc.get("last_update"),
         *fuel_updates,
     ]
     general_last_update = max((value for value in last_updates if value is not None), default=None)
@@ -97,14 +114,34 @@ def dashboard_view(request):
         "fuel_companies": fuel_companies,
         "fuels": fuels,
         "adrs": adrs,
+        "acciones_internacionales": acciones_internacionales["items"],
         "provincia_fondos": provincia_fondos,
         "top_adrs_resumen": top_adrs_resumen,
         "top_fondos_resumen": top_fondos_resumen,
         "general_last_update": general_last_update,
         "priority_fund_name": PRIORITY_FUND_NAME,
+        "ultima_actualizacion_acciones": acciones_internacionales["last_update"],
+        "ipc_mensual": indec_precios["ipc"].get("variacion_mensual"),
+        "ipc_periodo": indec_precios["ipc"].get("periodo"),
+        "ipim_mensual": indec_precios["ipim"].get("variacion_mensual"),
+        "ipim_periodo": indec_precios["ipim"].get("periodo"),
+        "riesgo_pais_valor": riesgo_pais.get("valor"),
+        "riesgo_pais_variacion": riesgo_pais.get("variacion"),
+        "riesgo_pais_cierre_anterior": riesgo_pais.get("cierre_anterior"),
+        "riesgo_pais_last_update": riesgo_pais.get("last_update"),
+        "indec_precios_last_update": indec_precios["last_update"],
+        "primary_ipc_interannual": primary_ipc_interannual,
+        "primary_ipc_source": primary_ipc_source,
         "noticias_pilar": noticias_pilar["items"],
         "noticias_count": noticias_pilar["count"],
         "tema_dominante": noticias_pilar["tema_dominante"],
         "ultima_actualizacion_noticias": noticias_pilar["last_update"],
+        "noticias_ipc": noticias_ipc["items"],
+        "noticias_ipc_count": noticias_ipc["count"],
+        "ipc_noticias_dato_consolidado": noticias_ipc["dato_consolidado_display"],
+        "ipc_noticias_coincidencias": noticias_ipc["coincidencias"],
+        "ipc_noticias_confianza": noticias_ipc["confidence_level"],
+        "ipc_noticias_confianza_display": noticias_ipc["confidence_level"].replace("-", " "),
+        "ultima_actualizacion_noticias_ipc": noticias_ipc["last_update"],
     }
     return render(request, "dashboard.html", context)

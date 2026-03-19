@@ -1,0 +1,54 @@
+{
+  "ultima_actualizacion": "2026-03-19T09:33:34-03:00",
+  "dato_consolidado": 32.4,
+  "coincidencias": 4,
+  "total_noticias_analizadas": 5,
+  "nivel_confianza": "alta",
+  "noticias": [
+    {
+      "titulo": "Indice de precios al consumidor",
+      "fuente": "INDEC",
+      "url": "https://www.indec.gob.ar/Nivel4/Tema/3/5/31",
+      "fecha_publicacion": "2026-02-10",
+      "resumen_corto": "El INDEC publico el informe tecnico del IPC de enero con una variacion mensual de 2,9% y el detalle oficial por rubros y regiones.",
+      "ipc_interanual_detectado": null,
+      "relevancia": 96
+    },
+    {
+      "titulo": "Que puesto ocupo el pais en la region con el 2,9% de inflacion en enero",
+      "fuente": "LA NACION",
+      "url": "https://www.lanacion.com.ar/economia/inflacion-de-enero-que-puesto-ocupo-el-pais-en-la-region-nid10022026/",
+      "fecha_publicacion": "2026-02-10",
+      "resumen_corto": "La nota destaca que la variacion mensual fue de 2,9% y que el dato interanual quedo en 32,4%, dejando a la Argentina entre los registros mas altos de la region.",
+      "ipc_interanual_detectado": 32.4,
+      "relevancia": 94
+    },
+    {
+      "titulo": "La reaccion de Caputo ante la inflacion de enero: Va a converger a niveles internacionales",
+      "fuente": "Infobae",
+      "url": "https://www.infobae.com/economia/2026/02/10/la-reaccion-de-caputo-ante-la-inflacion-de-enero-va-a-converger-a-niveles-internacionales/",
+      "fecha_publicacion": "2026-02-10",
+      "resumen_corto": "Infobae repasa el dato del INDEC y senala que la inflacion de enero fue 2,9% mensual, con una variacion interanual de 32,4% a nivel nacional.",
+      "ipc_interanual_detectado": 32.4,
+      "relevancia": 92
+    },
+    {
+      "titulo": "La inflacion de Argentina desciende en enero y se situa en el 32,4% interanual",
+      "fuente": "Europa Press",
+      "url": "https://www.europapress.es/economia/macroeconomia-00338/noticia-inflacion-argentina-desciende-enero-situa-324-interanual-20260210201014.html",
+      "fecha_publicacion": "2026-02-10",
+      "resumen_corto": "Europa Press informa que el IPC argentino de enero se ubico en 32,4% interanual y 2,9% mensual, citando los datos difundidos por el INDEC.",
+      "ipc_interanual_detectado": 32.4,
+      "relevancia": 90
+    },
+    {
+      "titulo": "La inflacion de Argentina desciende en enero y se situa en el 32,4% interanual",
+      "fuente": "Forbes Espana",
+      "url": "https://forbes.es/economia/871988/la-inflacion-de-argentina-desciende-en-enero-y-se-situa-en-el-324-interanual/",
+      "fecha_publicacion": "2026-02-10",
+      "resumen_corto": "Forbes retoma la publicacion oficial del INDEC y resume que la inflacion argentina se ubico en 32,4% interanual durante enero de 2026.",
+      "ipc_interanual_detectado": 32.4,
+      "relevancia": 88
+    }
+  ]
+}

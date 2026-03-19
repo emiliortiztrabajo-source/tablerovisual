@@ -1,0 +1,18 @@
+{
+  "ultima_actualizacion": "2026-03-19T12:55:54-03:00",
+  "fuente": "https://www.indec.gob.ar/indec/web/Nivel3-Tema-3-5",
+  "ipc": {
+    "indicador": "IPC",
+    "titulo": "Precios al consumidor",
+    "variacion_mensual": 2.9,
+    "periodo": "Febrero 2026",
+    "nivel": "Nivel general"
+  },
+  "ipim": {
+    "indicador": "IPIM",
+    "titulo": "Precios mayoristas",
+    "variacion_mensual": 1.0,
+    "periodo": "Febrero 2026",
+    "nivel": "Nivel general"
+  }
+}

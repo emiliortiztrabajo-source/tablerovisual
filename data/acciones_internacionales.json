@@ -1,0 +1,76 @@
+{
+  "ultima_actualizacion": "2026-03-19T12:02:07-03:00",
+  "fuente": "Yahoo Finance chart",
+  "acciones": [
+    {
+      "nombre": "Apple",
+      "ticker": "AAPL",
+      "precio_actual": 249.77,
+      "variacion_porcentual": -2.34,
+      "moneda": "USD",
+      "fecha_dato": "2026-03-19",
+      "fecha_scraping": "2026-03-19T12:02:07-03:00",
+      "tipo_activo": "accion_internacional"
+    },
+    {
+      "nombre": "Microsoft",
+      "ticker": "MSFT",
+      "precio_actual": 389.89,
+      "variacion_porcentual": -2.98,
+      "moneda": "USD",
+      "fecha_dato": "2026-03-19",
+      "fecha_scraping": "2026-03-19T12:02:07-03:00",
+      "tipo_activo": "accion_internacional"
+    },
+    {
+      "nombre": "Alphabet",
+      "ticker": "GOOGL",
+      "precio_actual": 305.12,
+      "variacion_porcentual": 0.52,
+      "moneda": "USD",
+      "fecha_dato": "2026-03-19",
+      "fecha_scraping": "2026-03-19T12:02:07-03:00",
+      "tipo_activo": "accion_internacional"
+    },
+    {
+      "nombre": "Amazon",
+      "ticker": "AMZN",
+      "precio_actual": 207.56,
+      "variacion_porcentual": -0.94,
+      "moneda": "USD",
+      "fecha_dato": "2026-03-19",
+      "fecha_scraping": "2026-03-19T12:02:07-03:00",
+      "tipo_activo": "accion_internacional"
+    },
+    {
+      "nombre": "Tesla",
+      "ticker": "TSLA",
+      "precio_actual": 381.62,
+      "variacion_porcentual": -3.39,
+      "moneda": "USD",
+      "fecha_dato": "2026-03-19",
+      "fecha_scraping": "2026-03-19T12:02:07-03:00",
+      "tipo_activo": "accion_internacional"
+    },
+    {
+      "nombre": "Nvidia",
+      "ticker": "NVDA",
+      "precio_actual": 178.1,
+      "variacion_porcentual": -2.75,
+      "moneda": "USD",
+      "fecha_dato": "2026-03-19",
+      "fecha_scraping": "2026-03-19T12:02:07-03:00",
+      "tipo_activo": "accion_internacional"
+    },
+    {
+      "nombre": "Meta",
+      "ticker": "META",
+      "precio_actual": 608.15,
+      "variacion_porcentual": -4.71,
+      "moneda": "USD",
+      "fecha_dato": "2026-03-19",
+      "fecha_scraping": "2026-03-19T12:02:07-03:00",
+      "tipo_activo": "accion_internacional"
+    }
+  ]
+}
