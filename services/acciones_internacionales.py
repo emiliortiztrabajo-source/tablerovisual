@@ -205,24 +205,35 @@ def update_acciones_internacionales_json() -> dict[str, Any]:
 
 
 def get_dashboard_acciones_internacionales() -> dict[str, Any]:
+    from django.utils import timezone
     cached_payload = read_acciones_internacionales_json()
-    if cached_payload is None:
-        return {
-            "items": [],
-            "last_update": None,
-            "source": None,
-        }
-
+    update_needed = False
     parsed_last_update = None
-    raw_last_update = cached_payload.get("ultima_actualizacion")
+    today = timezone.localdate()
+    raw_last_update = cached_payload.get("ultima_actualizacion") if cached_payload else None
     if raw_last_update:
         try:
             parsed_last_update = datetime.fromisoformat(raw_last_update)
+            # Si la fecha no es de hoy, forzar update
+            if parsed_last_update.date() != today:
+                update_needed = True
         except ValueError:
+            update_needed = True
+    else:
+        update_needed = True
+
+    if update_needed:
+        # Esto puede demorar unos segundos, pero asegura datos frescos
+        result = update_acciones_internacionales_json()
+        cached_payload = result["payload"]
+        raw_last_update = cached_payload.get("ultima_actualizacion")
+        try:
+            parsed_last_update = datetime.fromisoformat(raw_last_update)
+        except Exception:
             parsed_last_update = None
 
     normalized_items: list[dict[str, Any]] = []
-    for item in cached_payload.get("acciones", []):
+    for item in (cached_payload.get("acciones", []) if cached_payload else []):
         enriched_item = dict(item)
         variation = enriched_item.get("variacion_porcentual")
         enriched_item["is_positive"] = variation is not None and variation >= 0
@@ -232,5 +243,5 @@ def get_dashboard_acciones_internacionales() -> dict[str, Any]:
     return {
         "items": normalized_items,
         "last_update": parsed_last_update,
-        "source": cached_payload.get("fuente"),
+        "source": cached_payload.get("fuente") if cached_payload else None,
     }
