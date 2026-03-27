@@ -1,10 +1,10 @@
 {
-  "ultima_actualizacion": "2026-03-19T13:43:27-03:00",
+  "ultima_actualizacion": "2026-03-27T12:46:56-03:00",
   "fuente": "https://www.ambito.com/contenidos/riesgo-pais.html",
   "riesgo_pais": {
-    "valor": 632,
-    "variacion": 3.61,
-    "cierre_anterior": 610,
-    "fecha_scraping": "2026-03-19T13:40:02-03:00"
+    "valor": 605,
+    "variacion": 3.77,
+    "cierre_anterior": 583,
+    "fecha_scraping": "2026-03-27T12:45:01-03:00"
   }
 }

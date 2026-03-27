@@ -1,3 +1,5 @@
+import os
+import socket
 from pathlib import Path
 
 
@@ -7,7 +9,28 @@ SECRET_KEY = "django-insecure-argentina-dashboard-dev-key"
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver"]
+_default_allowed_hosts = {"127.0.0.1", "localhost", "testserver"}
+
+for candidate in {socket.gethostname(), socket.getfqdn()}:
+    if candidate:
+        _default_allowed_hosts.add(candidate)
+
+try:
+    _default_allowed_hosts.update(
+        ip_address
+        for ip_address in socket.gethostbyname_ex(socket.gethostname())[2]
+        if ip_address
+    )
+except socket.gaierror:
+    pass
+
+_env_allowed_hosts = {
+    value.strip()
+    for value in os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
+    if value.strip()
+}
+
+ALLOWED_HOSTS = sorted(_default_allowed_hosts | _env_allowed_hosts)
 
 INSTALLED_APPS = [
     "django.contrib.admin",

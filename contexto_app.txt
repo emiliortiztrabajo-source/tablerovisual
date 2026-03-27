@@ -1,0 +1,422 @@
+CONTEXTO GENERAL DE LA APP
+==========================
+
+Nombre funcional:
+Centro de Monitoreo Pilar
+
+Tipo de sistema:
+Proyecto Django con una unica app principal llamada "dashboard".
+
+Objetivo del programa:
+Este sistema funciona como un tablero ejecutivo de monitoreo economico y contextual.
+Su foco esta en mostrar, en una sola pantalla, indicadores utiles para seguimiento
+rapido del contexto argentino y del municipio de Pilar.
+
+En terminos practicos, el programa junta datos de:
+- dolar blue
+- IPC e inflacion
+- precios mayoristas
+- combustibles
+- ADRs y acciones internacionales
+- fondos de Provincia Fondos
+- riesgo pais
+- noticias locales de Pilar
+- noticias relacionadas con IPC interanual
+
+La idea del producto no es ser un sistema transaccional ni una API publica, sino
+un panel interno/ejecutivo de lectura rapida con acceso mediante login.
+
+
+COMO ESTA ARMADO EL PROYECTO
+============================
+
+1. project/
+Contiene la configuracion general de Django.
+- settings.py: configuracion global, SQLite, zona horaria, templates, static y login.
+- urls.py: define las rutas principales del sistema.
+
+2. dashboard/
+Es la app principal del proyecto.
+- views.py: arma todo el contexto que se muestra en el dashboard.
+- models.py: guarda series historicas locales en SQLite.
+- admin.py: expone esos modelos en el admin de Django.
+- management/commands/: comandos para refrescar datos desde consola.
+
+3. services/
+Contiene la logica real de integracion con fuentes externas.
+Cada modulo obtiene, normaliza, cachea y entrega un bloque de informacion.
+
+4. templates/
+Contiene las vistas HTML renderizadas por Django.
+- login.html
+- dashboard.html
+
+5. static/
+Contiene estilos CSS del panel.
+
+6. data/
+Guarda caches JSON locales con la ultima informacion scrapeada o consultada.
+
+7. db.sqlite3
+Base de datos local SQLite del proyecto.
+
+
+FLUJO PRINCIPAL DEL SISTEMA
+===========================
+
+1. El servidor arranca con manage.py y usa project.settings.
+2. El usuario entra a /login/ y se autentica con el sistema de auth de Django.
+3. La ruta principal "/" llama a dashboard_view en dashboard/views.py.
+4. Esa vista consulta varios servicios en services/.
+5. Cada servicio intenta devolver informacion actual o cacheada.
+6. Se arma un gran diccionario "context" con todos los indicadores.
+7. Django renderiza templates/dashboard.html con ese contexto.
+8. En el frontend, Chart.js y algo de JavaScript agregan grafico y rotaciones visuales.
+
+En otras palabras:
+la vista principal no calcula todo por si sola, sino que orquesta multiples servicios
+especializados y consolida el resultado final para la UI.
+
+
+QUE VE EL USUARIO EN PANTALLA
+============================
+
+La pantalla principal muestra:
+- KPI de dolar blue compra, venta y variacion
+- precios al consumidor (IPC)
+- IPC interanual
+- precios mayoristas (IPIM)
+- riesgo pais
+- precios promedio de combustibles
+- resumen de ADRs destacados
+- resumen de fondos de Provincia Fondos
+- carrusel de acciones internacionales
+- noticias locales de Pilar
+- noticias sobre IPC interanual y un "dato consolidado"
+- grafico de IPC de los ultimos 12 meses
+
+La UI esta pensada como tablero ejecutivo:
+- una sola pantalla principal
+- lectura visual rapida
+- bloques con ultima actualizacion
+- detalle expandible para ADRs y fondos
+
+
+RUTA Y SEGURIDAD
+================
+
+Rutas principales:
+- /login/
+- /logout/
+- /
+- /admin/
+
+El dashboard principal usa @login_required, por lo que no se accede sin iniciar sesion.
+La autenticacion usa el sistema nativo de Django.
+
+
+MODELOS QUE GUARDA SQLITE
+=========================
+
+El sistema no guarda todo en base de datos. Solo algunos modulos sincronizan informacion
+en modelos locales:
+
+1. DollarQuote
+Guarda cotizaciones del dolar blue con compra, venta, variacion diaria y timestamps.
+
+2. InflationData
+Guarda la serie historica del IPC para el grafico y el dato interanual.
+
+3. FuelPrice
+Guarda precios de combustibles por empresa, provincia, tipo de combustible y fecha.
+
+4. AdrQuote
+Guarda cotizaciones de ADRs/acciones argentinas seleccionadas.
+
+Observacion importante:
+otros bloques, como noticias, riesgo pais, acciones internacionales y Provincia Fondos,
+se apoyan principalmente en archivos JSON dentro de data/.
+
+
+ESTRATEGIA DE DATOS Y FALLBACKS
+===============================
+
+El proyecto esta pensado para tolerar caidas parciales de fuentes externas.
+
+Patron comun:
+- intenta consultar una fuente real
+- normaliza el resultado
+- guarda un JSON local en data/
+- en algunos casos sincroniza ademas a SQLite
+- si la fuente falla, usa el cache JSON local
+- si no hay JSON y el modulo lo permite, usa una alternativa local o vacia
+
+Esto hace que el dashboard pueda seguir mostrando informacion aunque una API o scraping
+externo falle temporalmente.
+
+
+SERVICIOS Y QUE HACE CADA UNO
+=============================
+
+1. services/dolar.py
+Fuente principal:
+- https://dolarapi.com/v1/dolares/blue
+
+Responsabilidad:
+- trae cotizacion de dolar blue
+- calcula variacion contra snapshot previo
+- guarda data/dolar_blue.json
+- sincroniza el dato a DollarQuote
+- si el cache esta viejo, intenta refrescarlo automaticamente
+- si falla la API, cae a JSON local o a la base
+
+
+2. services/ipc.py
+Fuente principal:
+- API de series de Datos Argentina / INDEC
+
+Responsabilidad:
+- descarga serie historica del IPC
+- conserva 12 meses para el grafico
+- calcula variacion interanual usando el indice contra el mismo mes del anio anterior
+- guarda data/ipc_historico.json
+- sincroniza la serie a InflationData
+
+
+3. services/indec_precios.py
+Fuente principal:
+- pagina de INDEC de precios
+
+Responsabilidad:
+- scrapea IPC e IPIM mensuales desde el sitio de INDEC
+- guarda data/indec_precios.json
+- provee el bloque rapido de "precios al consumidor" y "precios mayoristas"
+
+Este modulo complementa a ipc.py:
+- ipc.py se usa para la serie historica y el grafico
+- indec_precios.py se usa para mostrar el valor mensual mas visible en portada
+
+
+4. services/combustibles.py
+Fuente principal:
+- API CKAN de datos.energia.gob.ar
+
+Responsabilidad:
+- consulta precios en surtidor
+- calcula promedio por tipo de combustible
+- trabaja con empresas YPF, Shell y Axion
+- usa por defecto la provincia de Buenos Aires
+- sincroniza resultados en FuelPrice
+
+
+5. services/adrs.py
+Fuente principal:
+- tabla publica de InvertirOnline
+
+Responsabilidad:
+- scrapea cotizaciones de especies seleccionadas
+- prioriza papeles vinculados a ADRs argentinos relevantes
+- guarda data/adrs.json
+- sincroniza resultados a AdrQuote
+- usa fallback de navegador si hiciera falta
+
+
+6. services/acciones_internacionales.py
+Fuente principal:
+- Yahoo Finance chart endpoint
+
+Responsabilidad:
+- consulta acciones internacionales como Apple, Microsoft, Amazon, Tesla, Nvidia, etc.
+- calcula variacion diaria contra cierre previo
+- guarda data/acciones_internacionales.json
+- si algun ticker falla, intenta fallback parcial con cache previo
+
+
+7. services/provincia_fondos.py
+Fuente principal:
+- sitio y API descubierta de Provincia Fondos
+
+Responsabilidad:
+- detecta fondos disponibles
+- obtiene valor de cuotaparte y datos principales
+- guarda data/provincia_fondos.json
+- entrega el listado para la tabla del dashboard
+
+Detalle de negocio importante:
+en la vista se prioriza el fondo "1822 RAICES INVERSION", que se muestra primero
+y ademas queda marcado como fondo prioritario.
+
+
+8. services/riesgo_pais.py
+Fuente principal:
+- pagina de Ambito y endpoints del mercado asociados
+
+Responsabilidad:
+- obtiene valor, variacion y cierre anterior del riesgo pais
+- guarda data/riesgo_pais.json
+- soporta fallback a JSON local si falla el scraping
+
+
+9. services/noticias_pilar.py
+Fuentes principales:
+- RSS de Pilar a Diario
+- Google News RSS
+- paginas oficiales del Municipio de Pilar
+
+Responsabilidad:
+- junta noticias locales recientes
+- clasifica temas (seguridad, salud, obras, servicios, educacion, economia, etc.)
+- ordena por relevancia
+- detecta tema dominante
+- guarda data/noticias_pilar.json
+
+
+10. services/noticias_ipc.py
+Fuentes principales:
+- multiples consultas a Google News RSS
+- enriquecimiento opcional leyendo articulos
+
+Responsabilidad:
+- busca noticias sobre IPC interanual de Argentina
+- intenta extraer porcentajes interanuales desde titulo, resumen y cuerpo
+- calcula un "dato consolidado" segun coincidencias entre fuentes
+- asigna un nivel de confianza
+- guarda data/noticias_ipc.json
+
+Este modulo es uno de los mas "inteligentes" del proyecto, porque no solo muestra
+noticias: tambien intenta inferir un valor interanual de IPC a partir del contenido.
+
+
+COMANDO CENTRAL DE ACTUALIZACION
+================================
+
+El comando mas importante es:
+python manage.py update_dashboard_data
+
+Ese comando:
+- actualiza dolar blue
+- actualiza combustibles
+- actualiza ADRs
+- actualiza INDEC precios
+- actualiza IPC historico
+- actualiza acciones internacionales
+- actualiza noticias de Pilar
+- actualiza noticias de IPC
+- actualiza Provincia Fondos
+- actualiza riesgo pais
+
+Ademas existen comandos individuales, por ejemplo:
+- update_adrs
+- update_acciones_internacionales
+- update_indec_precios
+- update_ipc_historico
+- update_noticias_pilar
+- update_noticias_ipc
+- update_provincia_fondos
+- update_riesgo_pais
+- refresh_dollar_json
+
+
+ROL DE dashboard/views.py
+=========================
+
+dashboard_view es la pieza que consolida todo.
+
+Hace estas tareas clave:
+- pide cada bloque a un servicio distinto
+- construye los KPIs principales
+- arma resumentes de ADRs y fondos
+- prioriza "1822 RAICES INVERSION"
+- detecta cual es la ultima actualizacion general entre todos los modulos
+- define el dato de IPC interanual principal:
+  primero intenta usar noticias_ipc["dato_consolidado"]
+  si no existe, cae al valor interanual de la serie local
+
+O sea:
+la vista principal funciona como ensamblador del tablero.
+
+
+ROL DE LOS TEMPLATES
+====================
+
+templates/login.html
+- pantalla de acceso
+- usa el auth de Django
+
+templates/dashboard.html
+- renderiza todos los bloques del tablero
+- muestra KPIs, paneles, tablas y noticias
+- usa Chart.js para el grafico del IPC
+- usa JavaScript para:
+  - rotar empresas de combustibles
+  - rotar acciones internacionales
+  - pintar transiciones visuales simples
+
+No hay frontend desacoplado:
+la UI es server-rendered con Django templates.
+
+
+ESTILO VISUAL
+=============
+
+El CSS esta en static/css/dashboard.css.
+
+Caracteristicas visuales:
+- tema oscuro
+- tarjetas tipo dashboard ejecutivo
+- colores frios y acentos celestes
+- responsive para desktop y mobile
+
+
+CARPETA data/
+=============
+
+La carpeta data funciona como cache operativo del sistema.
+Archivos detectados:
+- dolar_blue.json
+- ipc_historico.json
+- indec_precios.json
+- adrs.json
+- acciones_internacionales.json
+- provincia_fondos.json
+- riesgo_pais.json
+- noticias_pilar.json
+- noticias_ipc.json
+
+Estos archivos permiten:
+- bajar dependencia del vivo en cada request
+- conservar el ultimo estado util
+- tener fallback cuando falla una fuente externa
+
+
+QUE NO HACE ESTE PROYECTO
+=========================
+
+Segun el codigo actual, este proyecto no parece estar pensado para:
+- exponer una API REST
+- permitir carga manual de datos desde usuarios finales
+- gestionar multiples pantallas o modulos de negocio separados
+- ejecutar logica compleja de permisos por rol
+- correr una bateria de tests automatizados (no se ven tests en el repo)
+
+
+RESUMEN EJECUTIVO FINAL
+=======================
+
+Este programa es un dashboard Django de monitoreo economico y contextual para Pilar.
+Combina scraping, APIs publicas, cache JSON local y algunos modelos SQLite para dar
+una vista ejecutiva unica protegida por login.
+
+La arquitectura esta centrada en:
+- una vista principal que orquesta todo
+- servicios desacoplados por fuente o dominio
+- persistencia mixta entre JSON y base local
+- degradacion controlada mediante fallbacks
+
+Si alguien se suma al proyecto, la mejor forma de entenderlo es esta:
+1. project/ configura Django
+2. dashboard/views.py arma el tablero
+3. services/ trae y normaliza los datos
+4. templates/dashboard.html los muestra
+5. dashboard/management/commands/update_dashboard_data.py refresca todo
+
