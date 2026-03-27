@@ -1,15 +1,15 @@
 {
   "compra": 1400.0,
   "venta": 1420.0,
-  "ultima_actualizacion": "2026-03-20T13:01:00-03:00",
-  "ultima_sincronizacion": "2026-03-20T16:49:06.841570+00:00",
+  "ultima_actualizacion": "2026-03-26T09:56:00-03:00",
+  "ultima_sincronizacion": "2026-03-26T13:26:15.671532+00:00",
   "fuente": "dolarapi_blue",
   "fuente_nombre": "DolarApi Blue",
   "fuente_url": "https://dolarapi.com/v1/dolares/blue",
   "estado": "live",
   "anterior": {
-    "compra": 1410.0,
-    "venta": 1430.0,
-    "ultima_actualizacion": "2026-03-19T13:57:00-03:00"
+    "compra": 1400.0,
+    "venta": 1420.0,
+    "ultima_actualizacion": "2026-03-26T09:01:00-03:00"
   }
 }
