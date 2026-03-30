@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from decimal import Decimal
 from typing import Any
 
@@ -27,6 +27,7 @@ REQUEST_TIMEOUT_SECONDS = 25
 IPC_INDEX_SERIES_ID = "145.3_INGNACNAL_DICI_M_15"
 IPC_MONTHLY_VARIATION_SERIES_ID = "145.3_INGNACUAL_DICI_M_38"
 IPC_MONTHS_TO_KEEP = 12
+CACHE_TTL = timedelta(hours=24)
 
 MONTH_LABELS = {
     1: "Ene",
@@ -259,9 +260,26 @@ def sync_inflation_data() -> int:
     return sync_inflation_payload(result["payload"])
 
 
+def _is_cache_stale(cached: dict | None) -> bool:
+    if cached is None:
+        return True
+    raw = cached.get("ultima_actualizacion")
+    if not raw:
+        return True
+    try:
+        ts = datetime.fromisoformat(raw)
+        if ts.tzinfo is None:
+            from django.utils import timezone as tz
+            ts = tz.make_aware(ts)
+        from django.utils import timezone as tz
+        return (tz.now() - ts) >= CACHE_TTL
+    except (ValueError, TypeError):
+        return True
+
+
 def get_dashboard_inflation_data() -> dict[str, Any]:
     cached = read_ipc_historico_json()
-    if cached is None:
+    if _is_cache_stale(cached):
         cached = update_ipc_historico_json()["payload"]
 
     parsed_last_update = None

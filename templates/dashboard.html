@@ -8,8 +8,75 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @keyframes acciones-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        /* Ticker top */
+        #accionesTickerTrack.is-scrolling {
+            animation: acciones-scroll 18s linear infinite;
+        }
+        .acciones-ticker-wrap:hover #accionesTickerTrack.is-scrolling {
+            animation-play-state: paused;
+        }
+        /* Tarjetero */
+        #accionesTrack.is-scrolling {
+            animation: acciones-scroll 22s linear infinite;
+        }
+        #accionesCarousel:hover #accionesTrack.is-scrolling {
+            animation-play-state: paused;
+        }
+        .btn-chart-open {
+            background: none;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 0.72rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 6px;
+            transition: background 0.15s, border-color 0.15s;
+            letter-spacing: 0.02em;
+        }
+        .btn-chart-open:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.6);
+        }
+        .chart-modal-content {
+            background: #1a2536;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #dbe4ef;
+        }
+        .chart-modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .chart-modal-body {
+            min-height: 320px;
+        }
+    </style>
 </head>
 <body>
+    <!-- Ticker acciones internacionales -->
+    <div class="acciones-ticker-wrap">
+        <span class="acciones-ticker-label">Acciones</span>
+        <div class="acciones-carousel" id="accionesTickerCarousel">
+            <div class="acciones-track" id="accionesTickerTrack">
+                {% for accion in acciones_internacionales %}
+                    <div class="ticker-item">
+                        <span class="ticker-name">{{ accion.ticker }}</span>
+                        <span class="ticker-price">{{ accion.moneda|default:"USD" }} {{ accion.precio_actual|floatformat:2 }}</span>
+                        <span class="ticker-var {% if accion.is_positive %}trend-positive{% elif accion.is_negative %}trend-negative{% endif %}">
+                            {% if accion.variacion_porcentual is not None %}{{ accion.variacion_porcentual|floatformat:2 }}%{% else %}—{% endif %}
+                        </span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <span class="acciones-ticker-time">{% if ultima_actualizacion_acciones %}{{ ultima_actualizacion_acciones|date:"d/m H:i" }}{% endif %}</span>
+    </div>
+
     <div class="dashboard-shell">
         <div class="container executive-container">
             <header class="dashboard-header">
@@ -33,44 +100,43 @@
                 </div>
             </header>
 
-            <section class="kpi-grid kpi-grid-nine">
-                <!-- Dólar blue -->
-                <div class="kpi-card compact-kpi">
-                    <span class="kpi-label">Dólar blue compra</span>
-                    <h2 class="kpi-value">$ {{ dollar.buy_value|floatformat:2 }}</h2>
-                    <canvas id="chartDollarBuy" height="60"></canvas>
+            <section class="kpi-grid kpi-grid-six">
+                <!-- Dólar blue unificado -->
+                <div class="kpi-card compact-kpi kpi-unified">
+                    <span class="kpi-label">Dólar blue</span>
+                    <div class="kpi-unified-grid">
+                        <div class="kpi-unified-item">
+                            <span class="kpi-unified-sublabel">Compra</span>
+                            <strong class="kpi-unified-val">$ {{ dollar.buy_value|floatformat:2 }}</strong>
+                        </div>
+                        <div class="kpi-unified-item">
+                            <span class="kpi-unified-sublabel">Venta</span>
+                            <strong class="kpi-unified-val">$ {{ dollar.sell_value|floatformat:2 }}</strong>
+                        </div>
+                        <div class="kpi-unified-item" style="grid-column: span 2;">
+                            <span class="kpi-unified-sublabel">Var. día</span>
+                            <strong class="kpi-unified-val {% if dollar.variation_daily >= 0 %}trend-positive{% else %}trend-negative{% endif %}">
+                                {{ dollar.variation_daily|floatformat:2 }}%
+                            </strong>
+                        </div>
+                    </div>
+                    <p class="kpi-foot mb-0">{{ dollar.last_update|date:"d/m H:i" }} · {{ dollar.source_label }}</p>
+                    <button class="btn-chart-open" data-bs-toggle="modal" data-bs-target="#chartModal"
+                        data-chart-id="chartDollarBlue" data-chart-label="Dólar Blue — historial" data-has-dollar="true">
+                        Ver gráfico proyección
+                    </button>
                 </div>
-                <div class="kpi-card compact-kpi">
-                    <span class="kpi-label">Dólar blue venta</span>
-                    <h2 class="kpi-value">$ {{ dollar.sell_value|floatformat:2 }}</h2>
-                    <canvas id="chartDollarSell" height="60"></canvas>
-                </div>
-                <div class="kpi-card compact-kpi">
-                    <span class="kpi-label">Variación dólar blue</span>
-                    <h2 class="kpi-value {% if dollar.variation_daily >= 0 %}trend-positive{% else %}trend-negative{% endif %}">
-                        {{ dollar.variation_daily|floatformat:2 }}%
-                    </h2>
-                    <p class="kpi-foot mb-0">
-                        Actualizado: {{ dollar.last_update|date:"d/m H:i" }} · {{ dollar.source_label }}{% if dollar.is_fallback %} · fallback local{% endif %}
-                    </p>
-                    <canvas id="chartDollarVar" height="60"></canvas>
-                </div>
-                <!-- IPC -->
-                <div class="kpi-card compact-kpi">
-                    <span class="kpi-label">Precios al consumidor</span>
-                    <h2 class="kpi-value">
-                        {% if ipc_mensual is not None %}{{ ipc_mensual|floatformat:2 }}%{% else %}N/D{% endif %}
-                    </h2>
-                    <p class="kpi-foot mb-0">{{ ipc_periodo|default:"Sin período" }}</p>
-                    <canvas id="chartIPC" height="60"></canvas>
-                </div>
+                <!-- IPC interanual + mensual -->
                 <div class="kpi-card compact-kpi">
                     <span class="kpi-label">IPC interanual</span>
                     <h2 class="kpi-value">
                         {% if primary_ipc_interannual is not None %}{{ primary_ipc_interannual|floatformat:2 }}%{% else %}N/D{% endif %}
                     </h2>
-                    <p class="kpi-foot mb-0">Fuente: {{ primary_ipc_source }}</p>
-                    <canvas id="chartIPCInterannual" height="60"></canvas>
+                    <p class="kpi-foot mb-0">Mensual {{ ipc_periodo|default:"" }}: <strong>{% if ipc_mensual is not None %}{{ ipc_mensual|floatformat:2 }}%{% else %}N/D{% endif %}</strong></p>
+                    <button class="btn-chart-open" data-bs-toggle="modal" data-bs-target="#chartModal"
+                        data-chart-id="chartIPCInterannual" data-chart-label="IPC — últimos 12 meses" data-chart-color="#7dd3fc" data-has-ipc="true">
+                        Ver gráfico
+                    </button>
                 </div>
                 <!-- IPIM -->
                 <div class="kpi-card compact-kpi">
@@ -79,7 +145,10 @@
                         {% if ipim_mensual is not None %}{{ ipim_mensual|floatformat:2 }}%{% else %}N/D{% endif %}
                     </h2>
                     <p class="kpi-foot mb-0">{{ ipim_periodo|default:"Sin período" }}</p>
-                    <canvas id="chartIPIM" height="60"></canvas>
+                    <button class="btn-chart-open" data-bs-toggle="modal" data-bs-target="#chartModal"
+                        data-chart-id="chartIPIM" data-chart-label="IPIM Mensual" data-chart-color="#fca5a5">
+                        Ver gráfico
+                    </button>
                 </div>
                 <!-- Riesgo País -->
                 <div class="kpi-card compact-kpi">
@@ -100,23 +169,35 @@
                         {% if riesgo_pais_cierre_anterior is not None %}{{ riesgo_pais_cierre_anterior }}{% else %}N/D{% endif %}
                     </p>
                     <p class="kpi-foot mb-0">
-                        {% if riesgo_pais_last_update %}{{ riesgo_pais_last_update|date:"d/m H:i" }} · Ámbito{% else %}Ámbito · sin actualización{% endif %}
+                        {% if riesgo_pais_last_update %}{{ riesgo_pais_last_update|date:"d/m H:i" }} · {{ riesgo_pais_source_label|default:"Dolarito" }}{% else %}{{ riesgo_pais_source_label|default:"Dolarito" }} · sin actualización{% endif %}
                     </p>
-                    <canvas id="chartRiesgoPais" height="60"></canvas>
+                    <button class="btn-chart-open" data-bs-toggle="modal" data-bs-target="#chartModal"
+                        data-chart-id="chartRiesgoPais" data-chart-label="Riesgo País" data-chart-color="#fca5a5" data-has-riesgo="true">
+                        Ver gráfico
+                    </button>
                 </div>
-                <!-- Naftas -->
-                <div class="kpi-card compact-kpi">
-                    <span class="kpi-label">Nafta súper</span>
-                    <div class="fuel-chip" id="fuelCompanyChip">Combustibles: {{ fuels.empresa|default:"N/D" }}</div>
-                    <h2 class="kpi-value fuel-value" id="fuelSuperValue">{% if fuels.super is not None %}$ {{ fuels.super|floatformat:2 }}{% else %}N/D{% endif %}</h2>
-                    <p class="kpi-foot mb-0" id="fuelPremiumValue">Premium: {% if fuels.premium is not None %}$ {{ fuels.premium|floatformat:2 }}{% else %}N/D{% endif %}</p>
-                    <canvas id="chartNaftaSuper" height="60"></canvas>
-                </div>
-                <div class="kpi-card compact-kpi">
-                    <span class="kpi-label">Gasoil</span>
-                    <h2 class="kpi-value fuel-value" id="fuelGasoilValue">{% if fuels.gasoil is not None %}$ {{ fuels.gasoil|floatformat:2 }}{% else %}N/D{% endif %}</h2>
-                    <p class="kpi-foot mb-0" id="fuelMetaValue">{{ fuels.provincia|default:"Buenos Aires" }} · {{ fuels.fuente|default:"N/D" }}</p>
-                    <canvas id="chartGasoil" height="60"></canvas>
+                <!-- Combustibles unificado -->
+                <div class="kpi-card compact-kpi kpi-fuel-unified" style="cursor:default">
+                    <div class="fuel-unified-header">
+                        <span class="kpi-label mb-0">Combustibles</span>
+                        <div class="fuel-chip mb-0" id="fuelCompanyChip">{{ fuels.empresa|default:"N/D" }}</div>
+                    </div>
+                    <div class="fuel-dual-grid">
+                        <div>
+                            <span class="kpi-unified-sublabel">Nafta Súper</span>
+                            <strong class="kpi-value fuel-value" id="fuelSuperValue">{% if fuels.super is not None %}$ {{ fuels.super|floatformat:2 }}{% else %}N/D{% endif %}</strong>
+                            <p class="kpi-foot mb-0" id="fuelPremiumValue">Premium: {% if fuels.premium is not None %}$ {{ fuels.premium|floatformat:2 }}{% else %}N/D{% endif %}</p>
+                        </div>
+                        <div>
+                            <span class="kpi-unified-sublabel">Gasoil</span>
+                            <strong class="kpi-value fuel-value" id="fuelGasoilValue">{% if fuels.gasoil is not None %}$ {{ fuels.gasoil|floatformat:2 }}{% else %}N/D{% endif %}</strong>
+                            <p class="kpi-foot mb-0" id="fuelMetaValue">{{ fuels.provincia|default:"Bs As" }} · {{ fuels.fuente|default:"N/D" }}</p>
+                        </div>
+                    </div>
+                    <button class="btn-chart-open" data-bs-toggle="modal" data-bs-target="#chartModal"
+                        data-chart-id="chartNaftas" data-chart-label="Combustibles YPF — historial" data-has-naftas="true">
+                        Ver gráfico histórico
+                    </button>
                 </div>
             </section>
 
@@ -172,77 +253,6 @@
                 </div>
             </section>
 
-            <section class="panel-card acciones-panel">
-                <div class="summary-header mb-3">
-                    <div>
-                        <h3 class="panel-title mb-1">Acciones internacionales</h3>
-                        <p class="panel-subtitle mb-0">Seguimiento diario de referentes globales con rotación automática en pantalla.</p>
-                    </div>
-                    <div class="news-meta">
-                        <span>{{ acciones_internacionales|length }} acciones</span>
-                        <span>{% if ultima_actualizacion_acciones %}{{ ultima_actualizacion_acciones|date:"d/m H:i" }}{% else %}-{% endif %}</span>
-                    </div>
-                </div>
-
-                <div class="acciones-carousel" id="accionesCarousel">
-                    <div class="acciones-track" id="accionesTrack">
-                        {% for accion in acciones_internacionales|slice:":4" %}
-                            <article class="accion-card">
-                                <div class="accion-card-top">
-                                    <div>
-                                        <h4 class="accion-name">{{ accion.nombre }}</h4>
-                                        <p class="accion-ticker mb-0">{{ accion.ticker }}</p>
-                                    </div>
-                                    <span class="accion-badge">{{ accion.moneda|default:"USD" }}</span>
-                                </div>
-                                <div class="accion-card-body">
-                                    <strong class="accion-price">
-                                        {% if accion.precio_actual is not None %}{{ accion.moneda|default:"USD" }} {{ accion.precio_actual|floatformat:2 }}{% else %}N/D{% endif %}
-                                    </strong>
-                                    <span class="accion-variation {% if accion.is_positive %}trend-positive{% elif accion.is_negative %}trend-negative{% endif %}">
-                                        {% if accion.variacion_porcentual is not None %}{{ accion.variacion_porcentual|floatformat:2 }}%{% else %}N/D{% endif %}
-                                    </span>
-                                </div>
-                                <div class="accion-card-footer">
-                                    <span class="accion-date">{% if accion.fecha_dato %}{{ accion.fecha_dato }}{% else %}Sin fecha{% endif %}</span>
-                                    <span class="accion-kind">{{ accion.tipo_activo|default:"accion" }}</span>
-                                </div>
-                            </article>
-                        {% empty %}
-                            <p class="empty-state mb-0">No hay acciones internacionales disponibles por el momento.</p>
-                        {% endfor %}
-                    </div>
-                </div>
-            </section>
-
-            <section class="panel-card news-panel">
-                <div class="summary-header mb-3">
-                    <div>
-                        <h3 class="panel-title mb-1">Radar Pilar</h3>
-                        <p class="panel-subtitle mb-0">Contexto local reciente para una lectura ejecutiva rápida.</p>
-                    </div>
-                    <div class="news-meta">
-                        <span>{{ noticias_count }} noticias</span>
-                        <span>Tema dominante: {{ tema_dominante|title }}</span>
-                        <span>{% if ultima_actualizacion_noticias %}{{ ultima_actualizacion_noticias|date:"d/m H:i" }}{% else %}-{% endif %}</span>
-                    </div>
-                </div>
-                <div class="news-grid">
-                    {% for noticia in noticias_pilar %}
-                        <article class="news-card">
-                            <div class="news-card-top">
-                                <span class="news-badge">{{ noticia.tema|title }}</span>
-                                <span class="news-source">{{ noticia.fuente }}{% if noticia.fecha_publicacion %} · {{ noticia.fecha_publicacion }}{% endif %}</span>
-                            </div>
-                            <h4 class="news-title">{{ noticia.titulo }}</h4>
-                            <p class="news-summary">{{ noticia.resumen_corto }}</p>
-                            <a href="{{ noticia.url }}" target="_blank" rel="noopener noreferrer" class="summary-link">Abrir nota</a>
-                        </article>
-                    {% empty %}
-                        <p class="empty-state mb-0">No hay noticias disponibles para Radar Pilar.</p>
-                    {% endfor %}
-                </div>
-            </section>
 
             <section class="accordion executive-accordion" id="dashboardDetails">
                 <div class="accordion-item detail-card" id="detalle-adrs">
@@ -408,19 +418,58 @@
         </div>
     </div>
 
+    <!-- Modal de gráficos -->
+    <div class="modal fade" id="chartModal" tabindex="-1" aria-labelledby="chartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content chart-modal-content">
+                <div class="modal-header chart-modal-header">
+                    <h5 class="modal-title" id="chartModalLabel">Gráfico</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body chart-modal-body d-flex align-items-center justify-content-center">
+                    <div style="width: 100%; height: 400px; position: relative;" id="modalChartWrapper">
+                        <canvas id="modalChart"></canvas>
+                    </div>
+                    <p id="modalNoData" class="text-center mb-0 d-none" style="color: #8fa1b5;">
+                        Datos históricos no disponibles para este indicador.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ dollar_history.labels|json_script:"dollar-labels" }}
+    {{ dollar_history.compra|json_script:"dollar-compra" }}
+    {{ dollar_history.venta|json_script:"dollar-venta" }}
     {{ inflation.chart_labels|json_script:"ipc-labels" }}
     {{ inflation.chart_values|json_script:"ipc-values" }}
     {{ fuel_companies|json_script:"fuel-companies-data" }}
     {{ acciones_internacionales|json_script:"acciones-internacionales-data" }}
+    {{ naftas_history.labels|json_script:"naftas-labels" }}
+    {{ naftas_history.super|json_script:"naftas-super" }}
+    {{ naftas_history.premium|json_script:"naftas-premium" }}
+    {{ naftas_history.gasoil|json_script:"naftas-gasoil" }}
+    {{ riesgo_pais_chart_labels|json_script:"riesgo-pais-labels" }}
+    {{ riesgo_pais_chart_values|json_script:"riesgo-pais-values" }}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script>
+        const dollarLabels = JSON.parse(document.getElementById("dollar-labels").textContent);
+        const dollarCompra = JSON.parse(document.getElementById("dollar-compra").textContent);
+        const dollarVenta = JSON.parse(document.getElementById("dollar-venta").textContent);
         const ipcLabels = JSON.parse(document.getElementById("ipc-labels").textContent);
         const ipcValues = JSON.parse(document.getElementById("ipc-values").textContent);
+        const naftasLabels = JSON.parse(document.getElementById("naftas-labels").textContent);
+        const naftasSuper = JSON.parse(document.getElementById("naftas-super").textContent);
+        const naftasPremium = JSON.parse(document.getElementById("naftas-premium").textContent);
+        const naftasGasoil = JSON.parse(document.getElementById("naftas-gasoil").textContent);
+        const riesgoPaisLabels = JSON.parse(document.getElementById("riesgo-pais-labels").textContent);
+        const riesgoPaisValues = JSON.parse(document.getElementById("riesgo-pais-values").textContent);
         const fuelCompanies = JSON.parse(document.getElementById("fuel-companies-data").textContent);
         const accionesData = JSON.parse(document.getElementById("acciones-internacionales-data").textContent);
 
+        // Gráfico IPC principal (sección inferior)
         const ctx = document.getElementById("ipcChart");
         new Chart(ctx, {
             type: "line",
@@ -442,9 +491,7 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        labels: {
-                            color: "#dbe4ef"
-                        }
+                        labels: { color: "#dbe4ef" }
                     }
                 },
                 scales: {
@@ -463,6 +510,7 @@
             }
         });
 
+        // Rotación combustibles
         const fuelCompanyChip = document.getElementById("fuelCompanyChip");
         const fuelSuperValue = document.getElementById("fuelSuperValue");
         const fuelPremiumValue = document.getElementById("fuelPremiumValue");
@@ -476,10 +524,7 @@
         }
 
         function formatAccionPrice(value, currency) {
-            if (value === null || value === undefined) {
-                return "N/D";
-            }
-
+            if (value === null || value === undefined) return "N/D";
             return `${currency || "USD"} ${Number(value).toLocaleString("es-AR", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
@@ -487,10 +532,7 @@
         }
 
         function formatAccionVariation(value) {
-            if (value === null || value === undefined) {
-                return "N/D";
-            }
-
+            if (value === null || value === undefined) return "N/D";
             return `${Number(value).toLocaleString("es-AR", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
@@ -498,137 +540,72 @@
         }
 
         function formatAccionDate(value) {
-            if (!value) {
-                return "Sin fecha";
-            }
-
+            if (!value) return "Sin fecha";
             const [year, month, day] = value.split("-");
-            if (!year || !month || !day) {
-                return value;
-            }
-
+            if (!year || !month || !day) return value;
             return `${day}/${month}/${year}`;
         }
 
         function getVisibleAccionesCount() {
-            if (window.innerWidth < 768) {
-                return 1;
-            }
-
-            if (window.innerWidth < 1200) {
-                return 3;
-            }
-
+            if (window.innerWidth < 768) return 1;
+            if (window.innerWidth < 1200) return 3;
             return 4;
         }
 
-        let accionesIndex = 0;
-        let accionesRotationTimer = null;
         let accionesPaused = false;
 
-        function renderAccionesCards(useTransition = false) {
-            if (!accionesTrack || accionesData.length === 0) {
-                return;
+        function buildAccionCardHTML(accion) {
+            const variation = accion.variacion_porcentual;
+            let variationClass = "";
+            if (variation !== null && variation !== undefined) {
+                variationClass = Number(variation) >= 0 ? "trend-positive" : "trend-negative";
             }
-
-            const visibleCount = Math.min(getVisibleAccionesCount(), accionesData.length);
-            const cards = [];
-
-            for (let offset = 0; offset < visibleCount; offset += 1) {
-                const accion = accionesData[(accionesIndex + offset) % accionesData.length];
-                const variation = accion.variacion_porcentual;
-                let variationClass = "";
-                if (variation !== null && variation !== undefined) {
-                    variationClass = Number(variation) >= 0 ? "trend-positive" : "trend-negative";
-                }
-
-                cards.push(`
-                    <article class="accion-card">
-                        <div class="accion-card-top">
-                            <div>
-                                <h4 class="accion-name">${accion.nombre || "N/D"}</h4>
-                                <p class="accion-ticker mb-0">${accion.ticker || "N/D"}</p>
-                            </div>
-                            <span class="accion-badge">${accion.moneda || "USD"}</span>
+            return `
+                <article class="accion-card">
+                    <div class="accion-card-top">
+                        <div>
+                            <h4 class="accion-name">${accion.nombre || "N/D"}</h4>
+                            <p class="accion-ticker mb-0">${accion.ticker || "N/D"}</p>
                         </div>
-                        <div class="accion-card-body">
-                            <strong class="accion-price">${formatAccionPrice(accion.precio_actual, accion.moneda)}</strong>
-                            <span class="accion-variation ${variationClass}">${formatAccionVariation(variation)}</span>
-                        </div>
-                        <div class="accion-card-footer">
-                            <span class="accion-date">${formatAccionDate(accion.fecha_dato)}</span>
-                            <span class="accion-kind">${accion.tipo_activo || "accion"}</span>
-                        </div>
-                    </article>
-                `);
-            }
-
-            const applyMarkup = () => {
-                accionesTrack.style.setProperty("--acciones-columns", `${visibleCount}`);
-                accionesTrack.innerHTML = cards.join("");
-            };
-
-            if (!useTransition) {
-                applyMarkup();
-                return;
-            }
-
-            accionesTrack.classList.add("acciones-track-fade");
-            window.setTimeout(() => {
-                applyMarkup();
-                accionesTrack.classList.remove("acciones-track-fade");
-            }, 180);
+                        <span class="accion-badge">${accion.moneda || "USD"}</span>
+                    </div>
+                    <div class="accion-card-body">
+                        <strong class="accion-price">${formatAccionPrice(accion.precio_actual, accion.moneda)}</strong>
+                        <span class="accion-variation ${variationClass}">${formatAccionVariation(variation)}</span>
+                    </div>
+                    <div class="accion-card-footer">
+                        <span class="accion-date">${formatAccionDate(accion.fecha_dato)}</span>
+                        <span class="accion-kind">${accion.tipo_activo || "accion"}</span>
+                    </div>
+                </article>
+            `;
         }
 
-        function startAccionesRotation() {
-            if (!accionesTrack || accionesData.length <= getVisibleAccionesCount()) {
-                return;
-            }
-
-            if (accionesRotationTimer !== null) {
-                window.clearInterval(accionesRotationTimer);
-            }
-
-            accionesRotationTimer = window.setInterval(() => {
-                if (accionesPaused) {
-                    return;
-                }
-
-                accionesIndex = (accionesIndex + 1) % accionesData.length;
-                renderAccionesCards(true);
-            }, 4500);
+        function initAccionesSlider() {
+            if (!accionesCarousel || !accionesTrack || accionesData.length === 0) return;
+            // Duplicar para loop infinito seamless
+            const items = [...accionesData, ...accionesData];
+            accionesTrack.innerHTML = items.map(buildAccionCardHTML).join('');
+            accionesTrack.classList.add('is-scrolling');
         }
 
         function renderFuelCompany(company) {
-            if (!company) {
-                return;
-            }
-
-            fuelCompanyChip.classList.add("fuel-fade");
-            fuelSuperValue.classList.add("fuel-fade");
-            fuelPremiumValue.classList.add("fuel-fade");
-            fuelGasoilValue.classList.add("fuel-fade");
-            fuelMetaValue.classList.add("fuel-fade");
-
+            if (!company) return;
+            const fadeEls = [fuelCompanyChip, fuelSuperValue, fuelPremiumValue, fuelGasoilValue, fuelMetaValue];
+            fadeEls.forEach(el => el && el.classList.add("fuel-fade"));
             window.setTimeout(() => {
-                fuelCompanyChip.textContent = `Combustibles: ${company.empresa || "N/D"}`;
+                fuelCompanyChip.textContent = company.empresa || "N/D";
                 fuelSuperValue.textContent = formatFuelValue(company.super);
                 fuelPremiumValue.textContent = `Premium: ${formatFuelValue(company.premium)}`;
                 fuelGasoilValue.textContent = formatFuelValue(company.gasoil);
-                fuelMetaValue.textContent = `${company.provincia || "Buenos Aires"} · ${company.fuente || "N/D"}`;
-
-                fuelCompanyChip.classList.remove("fuel-fade");
-                fuelSuperValue.classList.remove("fuel-fade");
-                fuelPremiumValue.classList.remove("fuel-fade");
-                fuelGasoilValue.classList.remove("fuel-fade");
-                fuelMetaValue.classList.remove("fuel-fade");
+                fuelMetaValue.textContent = `${company.provincia || "Bs As"} · ${company.fuente || "N/D"}`;
+                fadeEls.forEach(el => el && el.classList.remove("fuel-fade"));
             }, 180);
         }
 
         if (fuelCompanies.length > 0) {
             let currentFuelIndex = 0;
             renderFuelCompany(fuelCompanies[currentFuelIndex]);
-
             if (fuelCompanies.length > 1) {
                 window.setInterval(() => {
                     currentFuelIndex = (currentFuelIndex + 1) % fuelCompanies.length;
@@ -637,75 +614,350 @@
             }
         }
 
+        function buildTickerItemHTML(accion) {
+            const variation = accion.variacion_porcentual;
+            let varClass = variation !== null && variation !== undefined
+                ? (Number(variation) >= 0 ? 'trend-positive' : 'trend-negative') : '';
+            const varText = variation !== null && variation !== undefined
+                ? `${Number(variation).toLocaleString('es-AR', {minimumFractionDigits:2, maximumFractionDigits:2})}%` : '—';
+            const price = accion.precio_actual !== null && accion.precio_actual !== undefined
+                ? `${accion.moneda || 'USD'} ${Number(accion.precio_actual).toLocaleString('es-AR', {minimumFractionDigits:2, maximumFractionDigits:2})}` : 'N/D';
+            return `<div class="ticker-item">
+                <span class="ticker-name">${accion.ticker || accion.nombre}</span>
+                <span class="ticker-price">${price}</span>
+                <span class="ticker-var ${varClass}">${varText}</span>
+            </div>`;
+        }
+
+        // Ticker top
+        const accionesTickerCarousel = document.getElementById('accionesTickerCarousel');
+        const accionesTickerTrack = document.getElementById('accionesTickerTrack');
+        if (accionesTickerCarousel && accionesTickerTrack && accionesData.length > 0) {
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                const items = [...accionesData, ...accionesData];
+                accionesTickerTrack.innerHTML = items.map(buildTickerItemHTML).join('');
+                accionesTickerTrack.classList.add('is-scrolling');
+            }));
+        }
+
         if (accionesCarousel && accionesTrack && accionesData.length > 0) {
-            renderAccionesCards(false);
-            startAccionesRotation();
-
-            accionesCarousel.addEventListener("mouseenter", () => {
-                accionesPaused = true;
-            });
-
-            accionesCarousel.addEventListener("mouseleave", () => {
-                accionesPaused = false;
-            });
-
+            requestAnimationFrame(() => requestAnimationFrame(initAccionesSlider));
+            let resizeTimer = null;
             window.addEventListener("resize", () => {
-                renderAccionesCards(false);
-                startAccionesRotation();
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(initAccionesSlider, 200);
             });
         }
     </script>
-<script>
-// Pantalla completa
-document.getElementById('fullscreenBtn').addEventListener('click', function() {
-    const elem = document.documentElement;
-    if (!document.fullscreenElement) {
-        elem.requestFullscreen();
-    } else {
-        document.exitFullscreen();
-    }
-});
+    <script>
+        // Pantalla completa
+        document.getElementById('fullscreenBtn').addEventListener('click', function() {
+            const elem = document.documentElement;
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        });
 
-// Datos históricos (deben ser pasados desde la vista en el contexto)
-const chartData = window.chartData || {};
+        // Modal de gráficos KPI
+        const IPC_CHART_IDS = ['chartIPC', 'chartIPCInterannual'];
+        let activeModalChart = null;
+        const chartModalEl = document.getElementById('chartModal');
 
-function renderLineChart(canvasId, labels, data, label, color) {
-    const ctx = document.getElementById(canvasId);
-    if (!ctx) return;
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: label,
-                data: data,
-                borderColor: color,
-                backgroundColor: color + '33',
-                fill: true,
-                tension: 0.25,
-                pointRadius: 0
-            }]
-        },
-        options: {
-            plugins: { legend: { display: false } },
-            scales: { x: { display: false }, y: { display: false } },
-            elements: { line: { borderWidth: 2 } },
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
-}
+        chartModalEl.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            if (!button) return;
 
-// Renderizar todos los gráficos (los datos deben venir del backend)
-renderLineChart('chartDollarBuy', chartData.dollarBuyLabels, chartData.dollarBuy, 'Dólar Blue Compra', '#38bdf8');
-renderLineChart('chartDollarSell', chartData.dollarSellLabels, chartData.dollarSell, 'Dólar Blue Venta', '#7dd3fc');
-renderLineChart('chartDollarVar', chartData.dollarVarLabels, chartData.dollarVar, 'Var. Dólar Blue', '#fca5a5');
-renderLineChart('chartIPC', chartData.ipcLabels, chartData.ipc, 'IPC Mensual', '#38bdf8');
-renderLineChart('chartIPCInterannual', chartData.ipcInterannualLabels, chartData.ipcInterannual, 'IPC Interanual', '#7dd3fc');
-renderLineChart('chartIPIM', chartData.ipimLabels, chartData.ipim, 'IPIM', '#fca5a5');
-renderLineChart('chartRiesgoPais', chartData.riesgoPaisLabels, chartData.riesgoPais, 'Riesgo País', '#fca5a5');
-renderLineChart('chartNaftaSuper', chartData.naftaSuperLabels, chartData.naftaSuper, 'Nafta Súper', '#38bdf8');
-renderLineChart('chartGasoil', chartData.gasoilLabels, chartData.gasoil, 'Gasoil', '#7dd3fc');
-</script>
+            const chartId = button.getAttribute('data-chart-id');
+            const chartLabel = button.getAttribute('data-chart-label');
+            const chartColor = button.getAttribute('data-chart-color') || '#38bdf8';
+
+            document.getElementById('chartModalLabel').textContent = chartLabel;
+
+            const canvas = document.getElementById('modalChart');
+            const noData = document.getElementById('modalNoData');
+            const wrapper = document.getElementById('modalChartWrapper');
+
+            if (activeModalChart) {
+                activeModalChart.destroy();
+                activeModalChart = null;
+            }
+
+            const hasIpc = button.getAttribute('data-has-ipc') === 'true';
+            const hasDollar = button.getAttribute('data-has-dollar') === 'true';
+            const hasNaftas = button.getAttribute('data-has-naftas') === 'true';
+            const hasRiesgoPais = button.getAttribute('data-has-riesgo') === 'true';
+
+            const scaleOpts = {
+                x: { ticks: { color: '#8fa1b5', maxTicksLimit: 10 }, grid: { color: 'rgba(143,161,181,0.12)' } },
+                y: { ticks: { color: '#8fa1b5', callback: v => '$ ' + v.toLocaleString('es-AR') }, grid: { color: 'rgba(143,161,181,0.12)' } }
+            };
+
+            if (hasDollar && dollarLabels && dollarLabels.length > 0) {
+                wrapper.classList.remove('d-none');
+                noData.classList.add('d-none');
+
+                // Gradientes
+                const ctxEl = canvas.getContext('2d');
+                const gradCompra = ctxEl.createLinearGradient(0, 0, 0, 300);
+                gradCompra.addColorStop(0, 'rgba(34,197,94,0.28)');
+                gradCompra.addColorStop(1, 'rgba(34,197,94,0.00)');
+                const gradVenta = ctxEl.createLinearGradient(0, 0, 0, 300);
+                gradVenta.addColorStop(0, 'rgba(251,146,60,0.28)');
+                gradVenta.addColorStop(1, 'rgba(251,146,60,0.00)');
+
+                activeModalChart = new Chart(canvas, {
+                    type: 'line',
+                    data: {
+                        labels: dollarLabels,
+                        datasets: [
+                            {
+                                label: 'Compra',
+                                data: dollarCompra,
+                                borderColor: '#22c55e',
+                                backgroundColor: gradCompra,
+                                fill: true,
+                                tension: 0.35,
+                                pointRadius: 0,
+                                pointHoverRadius: 5,
+                                borderWidth: 2,
+                                pointHoverBackgroundColor: '#22c55e',
+                            },
+                            {
+                                label: 'Venta',
+                                data: dollarVenta,
+                                borderColor: '#fb923c',
+                                backgroundColor: gradVenta,
+                                fill: true,
+                                tension: 0.35,
+                                pointRadius: 0,
+                                pointHoverRadius: 5,
+                                borderWidth: 2,
+                                pointHoverBackgroundColor: '#fb923c',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: {
+                                labels: { color: '#dbe4ef', usePointStyle: true, pointStyleWidth: 10 }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(15,23,42,0.92)',
+                                titleColor: '#94a3b8',
+                                bodyColor: '#dbe4ef',
+                                borderColor: 'rgba(255,255,255,0.08)',
+                                borderWidth: 1,
+                                padding: 10,
+                                callbacks: {
+                                    label: ctx => ` ${ctx.dataset.label}: $ ${Number(ctx.raw).toLocaleString('es-AR', {minimumFractionDigits:2})}`
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { color: '#8fa1b5', maxTicksLimit: 12, maxRotation: 0 },
+                                grid: { color: 'rgba(143,161,181,0.08)' }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#8fa1b5',
+                                    callback: v => '$ ' + Number(v).toLocaleString('es-AR')
+                                },
+                                grid: { color: 'rgba(143,161,181,0.08)' }
+                            }
+                        }
+                    }
+                });
+            } else if (hasNaftas && naftasLabels && naftasLabels.length > 0) {
+                wrapper.classList.remove('d-none');
+                noData.classList.add('d-none');
+                const ctxEl = canvas.getContext('2d');
+
+                function makeGrad(r, g, b) {
+                    const g2 = ctxEl.createLinearGradient(0, 0, 0, 340);
+                    g2.addColorStop(0, `rgba(${r},${g},${b},0.22)`);
+                    g2.addColorStop(1, `rgba(${r},${g},${b},0.00)`);
+                    return g2;
+                }
+
+                activeModalChart = new Chart(canvas, {
+                    type: 'line',
+                    data: {
+                        labels: naftasLabels,
+                        datasets: [
+                            {
+                                label: 'Nafta Súper',
+                                data: naftasSuper,
+                                borderColor: '#38bdf8',
+                                backgroundColor: makeGrad(56, 189, 248),
+                                fill: true, tension: 0.35,
+                                pointRadius: 0, pointHoverRadius: 5,
+                                borderWidth: 2.5,
+                                pointHoverBackgroundColor: '#38bdf8',
+                            },
+                            {
+                                label: 'Premium',
+                                data: naftasPremium,
+                                borderColor: '#a78bfa',
+                                backgroundColor: makeGrad(167, 139, 250),
+                                fill: true, tension: 0.35,
+                                pointRadius: 0, pointHoverRadius: 5,
+                                borderWidth: 2.5,
+                                pointHoverBackgroundColor: '#a78bfa',
+                            },
+                            {
+                                label: 'Gasoil',
+                                data: naftasGasoil,
+                                borderColor: '#fb923c',
+                                backgroundColor: makeGrad(251, 146, 60),
+                                fill: true, tension: 0.35,
+                                pointRadius: 0, pointHoverRadius: 5,
+                                borderWidth: 2.5,
+                                pointHoverBackgroundColor: '#fb923c',
+                            },
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: {
+                                labels: { color: '#dbe4ef', usePointStyle: true, pointStyleWidth: 10 }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(15,23,42,0.92)',
+                                titleColor: '#94a3b8',
+                                bodyColor: '#dbe4ef',
+                                borderColor: 'rgba(255,255,255,0.08)',
+                                borderWidth: 1,
+                                padding: 10,
+                                callbacks: {
+                                    label: ctx => ` ${ctx.dataset.label}: $ ${Number(ctx.raw).toLocaleString('es-AR', {minimumFractionDigits:2})}`
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { color: '#8fa1b5', maxTicksLimit: 12, maxRotation: 0 },
+                                grid: { color: 'rgba(143,161,181,0.08)' }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#8fa1b5',
+                                    callback: v => '$ ' + Number(v).toLocaleString('es-AR')
+                                },
+                                grid: { color: 'rgba(143,161,181,0.08)' }
+                            }
+                        }
+                    }
+                });
+            } else if (hasIpc && ipcLabels && ipcLabels.length > 0) {
+                wrapper.classList.remove('d-none');
+                noData.classList.add('d-none');
+                activeModalChart = new Chart(canvas, {
+                    type: 'line',
+                    data: {
+                        labels: ipcLabels,
+                        datasets: [{
+                            label: chartLabel,
+                            data: ipcValues,
+                            borderColor: chartColor,
+                            backgroundColor: chartColor + '29',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 3,
+                            pointHoverRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: '#dbe4ef' } } },
+                        scales: {
+                            x: { ticks: { color: '#8fa1b5' }, grid: { color: 'rgba(143,161,181,0.12)' } },
+                            y: { ticks: { color: '#8fa1b5', callback: v => v + '%' }, grid: { color: 'rgba(143,161,181,0.12)' } }
+                        }
+                    }
+                });
+            } else if (hasRiesgoPais && riesgoPaisLabels && riesgoPaisLabels.length > 0) {
+                wrapper.classList.remove('d-none');
+                noData.classList.add('d-none');
+
+                const ctxEl = canvas.getContext('2d');
+                const gradient = ctxEl.createLinearGradient(0, 0, 0, 320);
+                gradient.addColorStop(0, 'rgba(248, 113, 113, 0.28)');
+                gradient.addColorStop(1, 'rgba(248, 113, 113, 0.00)');
+
+                activeModalChart = new Chart(canvas, {
+                    type: 'line',
+                    data: {
+                        labels: riesgoPaisLabels,
+                        datasets: [{
+                            label: chartLabel,
+                            data: riesgoPaisValues,
+                            borderColor: chartColor,
+                            backgroundColor: gradient,
+                            fill: true,
+                            tension: 0.28,
+                            pointRadius: 0,
+                            pointHoverRadius: 4,
+                            borderWidth: 2.5,
+                            pointHoverBackgroundColor: chartColor,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(15,23,42,0.92)',
+                                titleColor: '#94a3b8',
+                                bodyColor: '#dbe4ef',
+                                borderColor: 'rgba(255,255,255,0.08)',
+                                borderWidth: 1,
+                                padding: 10,
+                                callbacks: {
+                                    label: ctx => ` ${chartLabel}: ${Number(ctx.raw).toLocaleString('es-AR')} pb`
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { color: '#8fa1b5', maxTicksLimit: 12, maxRotation: 0 },
+                                grid: { color: 'rgba(143,161,181,0.08)' }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#8fa1b5',
+                                    callback: v => `${Number(v).toLocaleString('es-AR')} pb`
+                                },
+                                grid: { color: 'rgba(143,161,181,0.08)' }
+                            }
+                        }
+                    }
+                });
+            } else {
+                wrapper.classList.add('d-none');
+                noData.classList.remove('d-none');
+            }
+        });
+
+        chartModalEl.addEventListener('hidden.bs.modal', function() {
+            if (activeModalChart) {
+                activeModalChart.destroy();
+                activeModalChart = null;
+            }
+            document.getElementById('modalChartWrapper').classList.remove('d-none');
+            document.getElementById('modalNoData').classList.add('d-none');
+        });
+    </script>
 </body>
 </html>

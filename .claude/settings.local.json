@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"chart\\\\|plotly\\\\|highcharts\\\\|echarts\" '/c/Users/eortiz/Documents/GitHub/fondos django/copia/tablerovisual' --include=*.html --include=*.js --include=*.py)",
+      "Bash(wc -l /c/Users/eortiz/Documents/GitHub/fondos django/copia/tablerovisual/services/*.py)",
+      "Bash(wc -l services/*.py)",
+      "Bash(netstat -ano)",
+      "Bash(findstr \":8001\")",
+      "Bash(.venv/Scripts/python manage.py runserver 9001)",
+      "WebFetch(domain:dolarhoy.com)",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(''''keys:'''', list\\(d.keys\\(\\)\\)[:5] if isinstance\\(d,dict\\) else ''''list''''\\); print\\(''''len:'''', len\\(d\\)\\); print\\(''''first:'''', str\\(d\\)[:300]\\)\")",
+      "Bash(.venv/Scripts/python -c \":*)",
+      "Bash(.venv/Scripts/python manage.py shell -c \":*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8000/)",
+      "Bash(python -c \":*)",
+      "WebFetch(domain:surtidores.com.ar)",
+      "Bash(python manage.py shell -c \":*)"
+    ]
+  }
+}

@@ -1,3 +1,60 @@
+/* ── Ticker de acciones (top) ── */
+.acciones-ticker-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #0d1b2e;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.12);
+    padding: 0.45rem 1.5rem;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.acciones-ticker-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #38bdf8;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.acciones-ticker-time {
+    font-size: 0.68rem;
+    color: #8fa1b5;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.acciones-ticker-wrap .acciones-carousel {
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+}
+.acciones-ticker-wrap .acciones-track {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2.5rem;
+    align-items: center;
+}
+.ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    font-size: 0.82rem;
+}
+.ticker-name {
+    font-weight: 700;
+    color: #dbe4ef;
+}
+.ticker-price {
+    color: #94a3b8;
+}
+.ticker-var {
+    font-size: 0.78rem;
+}
+
 :root {
     --bg-main: #0f172a;
     --bg-surface: #162132;
@@ -32,8 +89,8 @@ body {
 }
 
 .executive-container {
-    padding-top: 1rem;
-    padding-bottom: 1.35rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .dashboard-header {
@@ -41,8 +98,8 @@ body {
     justify-content: space-between;
     align-items: end;
     gap: 1rem;
-    margin-bottom: 0.85rem;
-    padding: 0.2rem 0 0.35rem;
+    margin-bottom: 0.5rem;
+    padding: 0.1rem 0 0.2rem;
 }
 
 .eyebrow {
@@ -152,8 +209,8 @@ body {
 
 .kpi-grid {
     display: grid;
-    gap: 0.8rem;
-    margin-bottom: 0.85rem;
+    gap: 0.55rem;
+    margin-bottom: 0.55rem;
 }
 
 .kpi-grid-seven {
@@ -164,37 +221,103 @@ body {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.kpi-grid-six {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
 .compact-kpi {
-    padding: 0.82rem 0.92rem;
-    min-height: 112px;
+    padding: 0.65rem 0.75rem;
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.compact-kpi .btn-chart-open {
+    margin-top: auto;
+}
+
+/* Card unificado dólar+IPC */
+.kpi-unified {
+    grid-column: span 1;
+}
+.kpi-unified-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 0.5rem;
+    margin-bottom: 0.3rem;
+    width: 100%;
+}
+.kpi-unified-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    align-items: center;
+}
+.kpi-unified-sublabel {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #8fa1b5;
+}
+.kpi-unified-val {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
 }
 
 .kpi-label {
     display: inline-block;
-    margin-bottom: 0.42rem;
-    font-size: 0.76rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
 
 .kpi-value {
-    font-size: clamp(1.22rem, 2vw, 1.82rem);
+    font-size: clamp(1.1rem, 1.8vw, 1.55rem);
     line-height: 1.05;
     font-weight: 700;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.1rem;
     color: var(--text-main);
+}
+
+.kpi-fuel-unified {
+    grid-column: span 2;
+}
+.fuel-unified-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    flex-wrap: wrap;
+}
+.fuel-dual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.1rem 0.8rem;
+    flex: 1;
+    width: 100%;
+}
+.fuel-dual-grid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .fuel-chip {
     display: inline-flex;
     align-items: center;
-    padding: 0.28rem 0.6rem;
-    margin-bottom: 0.55rem;
+    padding: 0.18rem 0.55rem;
     border-radius: 999px;
     background: var(--accent-soft);
     border: 1px solid rgba(56, 189, 248, 0.24);
     color: var(--text-soft);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
@@ -214,12 +337,12 @@ body {
 .summary-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.85rem;
-    margin-bottom: 0.85rem;
+    gap: 0.55rem;
+    margin-bottom: 0.55rem;
 }
 
 .summary-panel {
-    padding: 0.92rem 1rem;
+    padding: 0.65rem 0.85rem;
 }
 
 .summary-header {
@@ -364,11 +487,10 @@ body {
 }
 
 .acciones-track {
-    --acciones-columns: 4;
-    display: grid;
-    grid-template-columns: repeat(var(--acciones-columns), minmax(0, 1fr));
-    gap: 0.75rem;
-    transition: opacity 0.18s ease, transform 0.18s ease;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    will-change: transform;
 }
 
 .acciones-track-fade {
@@ -386,6 +508,22 @@ body {
         radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 32%),
         linear-gradient(180deg, rgba(22, 33, 50, 0.98), rgba(18, 28, 43, 0.98));
     border: 1px solid rgba(148, 163, 184, 0.12);
+    /* Ancho fijo por breakpoint para que encajen exactamente N tarjetas */
+    width: calc(25% - 0.75rem);
+    min-width: calc(25% - 0.75rem);
+    flex-shrink: 0;
+}
+@media (max-width: 1199px) {
+    .accion-card {
+        width: calc(33.333% - 0.67rem);
+        min-width: calc(33.333% - 0.67rem);
+    }
+}
+@media (max-width: 767px) {
+    .accion-card {
+        width: calc(100% - 0px);
+        min-width: calc(100% - 0px);
+    }
 }
 
 .accion-card-top,
@@ -832,8 +970,9 @@ body {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .kpi-grid-nine {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .kpi-grid-nine,
+    .kpi-grid-six {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .summary-grid,
@@ -871,6 +1010,7 @@ body {
 
     .kpi-grid-seven,
     .kpi-grid-nine,
+    .kpi-grid-six,
     .news-grid {
         grid-template-columns: 1fr;
     }
