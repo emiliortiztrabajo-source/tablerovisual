@@ -1,4 +1,5 @@
 import unicodedata
+from concurrent.futures import ThreadPoolExecutor
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -7,6 +8,8 @@ from services.adrs import get_dashboard_adrs
 from services.acciones_internacionales import get_dashboard_acciones_internacionales
 from services.combustibles import COMPANIES, DEFAULT_PROVINCE, get_dashboard_fuel_prices
 from services.dolar import get_dashboard_dollar_data
+from services.dolar_historico import get_dollar_chart_history
+from services.naftas_historico import get_naftas_chart_history
 from services.indec_precios import get_dashboard_indec_precios
 from services.ipc import get_dashboard_inflation_data
 from services.noticias_ipc import get_dashboard_noticias_ipc
@@ -65,17 +68,34 @@ def _build_fuel_companies() -> list[dict]:
 
 @login_required
 def dashboard_view(request):
-    dollar = get_dashboard_dollar_data()
-    inflation = get_dashboard_inflation_data()
-    fuel_companies = _build_fuel_companies()
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        future_dollar = executor.submit(get_dashboard_dollar_data)
+        future_dollar_history = executor.submit(get_dollar_chart_history)
+        future_naftas_history = executor.submit(get_naftas_chart_history)
+        future_inflation = executor.submit(get_dashboard_inflation_data)
+        future_fuel = executor.submit(_build_fuel_companies)
+        future_adrs = executor.submit(get_dashboard_adrs)
+        future_acciones = executor.submit(get_dashboard_acciones_internacionales)
+        future_fondos = executor.submit(get_dashboard_provincia_fondos)
+        future_indec = executor.submit(get_dashboard_indec_precios)
+        future_riesgo = executor.submit(get_dashboard_riesgo_pais)
+        future_noticias = executor.submit(get_dashboard_noticias_pilar)
+        future_noticias_ipc = executor.submit(get_dashboard_noticias_ipc)
+
+        dollar = future_dollar.result()
+        dollar_history = future_dollar_history.result()
+        naftas_history = future_naftas_history.result()
+        inflation = future_inflation.result()
+        fuel_companies = future_fuel.result()
+        adrs = future_adrs.result()
+        acciones_internacionales = future_acciones.result()
+        provincia_fondos = future_fondos.result()
+        indec_precios = future_indec.result()
+        riesgo_pais = future_riesgo.result()
+        noticias_pilar = future_noticias.result()
+        noticias_ipc = future_noticias_ipc.result()
+
     fuels = fuel_companies[0] if fuel_companies else None
-    adrs = get_dashboard_adrs()
-    acciones_internacionales = get_dashboard_acciones_internacionales()
-    provincia_fondos = get_dashboard_provincia_fondos()
-    indec_precios = get_dashboard_indec_precios()
-    riesgo_pais = get_dashboard_riesgo_pais()
-    noticias_pilar = get_dashboard_noticias_pilar()
-    noticias_ipc = get_dashboard_noticias_ipc()
     primary_ipc_interannual = noticias_ipc["dato_consolidado"]
     primary_ipc_source = "Noticias relevantes"
     if primary_ipc_interannual is None and inflation.get("year_over_year") is not None:
@@ -110,6 +130,8 @@ def dashboard_view(request):
 
     context = {
         "dollar": dollar,
+        "dollar_history": dollar_history,
+        "naftas_history": naftas_history,
         "inflation": inflation,
         "fuel_companies": fuel_companies,
         "fuels": fuels,
@@ -129,6 +151,9 @@ def dashboard_view(request):
         "riesgo_pais_variacion": riesgo_pais.get("variacion"),
         "riesgo_pais_cierre_anterior": riesgo_pais.get("cierre_anterior"),
         "riesgo_pais_last_update": riesgo_pais.get("last_update"),
+        "riesgo_pais_source_label": riesgo_pais.get("source_label"),
+        "riesgo_pais_chart_labels": riesgo_pais.get("chart_labels", []),
+        "riesgo_pais_chart_values": riesgo_pais.get("chart_values", []),
         "indec_precios_last_update": indec_precios["last_update"],
         "primary_ipc_interannual": primary_ipc_interannual,
         "primary_ipc_source": primary_ipc_source,

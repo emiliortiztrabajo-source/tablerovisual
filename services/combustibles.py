@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from collections import defaultdict
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from decimal import Decimal, ROUND_HALF_UP
 from typing import Any
 
@@ -182,6 +182,7 @@ def fetch_fuel_prices(company: str = "YPF", province: str = DEFAULT_PROVINCE) ->
     grouped_prices: dict[str, list[Decimal]] = defaultdict(list)
     latest_timestamp: datetime | None = None
 
+    date_ceiling = datetime.now() + timedelta(days=365)
     for record in records:
         fuel_type = _classify_fuel(str(record.get("producto", "")))
         if fuel_type is None:
@@ -191,13 +192,18 @@ def fetch_fuel_prices(company: str = "YPF", province: str = DEFAULT_PROVINCE) ->
         if price_value in (None, ""):
             continue
 
-        grouped_prices[fuel_type].append(Decimal(str(price_value)))
-
         timestamp_value = record.get("fecha_vigencia")
         if timestamp_value:
-            timestamp = _parse_timestamp(str(timestamp_value))
-            if latest_timestamp is None or timestamp > latest_timestamp:
-                latest_timestamp = timestamp
+            try:
+                timestamp = _parse_timestamp(str(timestamp_value))
+                if timestamp > date_ceiling:
+                    continue  # fecha absurda (ej: año 4201), descartar registro
+                if latest_timestamp is None or timestamp > latest_timestamp:
+                    latest_timestamp = timestamp
+            except (ValueError, TypeError):
+                continue
+
+        grouped_prices[fuel_type].append(Decimal(str(price_value)))
 
     if latest_timestamp is None:
         latest_timestamp = datetime.now()

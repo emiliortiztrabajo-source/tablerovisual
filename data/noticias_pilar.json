@@ -1,52 +1,52 @@
 {
-  "ultima_actualizacion": "2026-03-30T10:39:58-03:00",
+  "ultima_actualizacion": "2026-03-30T15:18:58-03:00",
   "cantidad_noticias": 5,
-  "tema_dominante": "seguridad",
+  "tema_dominante": "servicios",
   "noticias": [
     {
-      "titulo": "La semana corta empieza en Pilar con un lunes gris, húmedo y con probabilidades de lluvias",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/informacion-general/la-semana-corta-empieza-pilar-un-lunes-gris-humedo-y-probabilidades-lluvias-n5468742",
+      "titulo": "Pilar se prepara para una jornada de memoria y homenaje a los héroes de Malvinas",
+      "fuente": "Diario Resumen",
+      "url": "https://diarioresumen.com.ar/politica/pilar-se-prepara-para-una-jornada-de-memoria-y-homenaje-a-los-heroes-de-malvinas",
       "fecha_publicacion": "2026-03-30",
-      "resumen_corto": "Tras un amanecer con neblina y lloviznas, el Servicio Meteorológico Nacional anuncia chaparrones y temperatura máxima de 27°C en Pilar y la región.",
+      "resumen_corto": "En el marco de un nuevo aniversario del 2 de abril, el distrito organizará una caravana y una vigilia abierta a la comunidad. La propuesta busca reunir a vecinos, veteranos y familiares e...",
       "tema": "servicios",
-      "relevancia": 58
+      "relevancia": 54
     },
     {
-      "titulo": "Una mujer atacó a otra y le cortó la cara con un cuchillo",
+      "titulo": "Ya está disponible en farmacias la vacuna antigripal para afiliados de PAMI",
       "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/policiales/una-mujer-ataco-otra-y-le-corto-la-cara-un-cuchillo-n5468741",
+      "url": "https://www.pilaradiario.com/informacion-general/ya-esta-disponible-farmacias-la-vacuna-antigripal-afiliados-pami-n5468754",
       "fecha_publicacion": "2026-03-30",
-      "resumen_corto": "Ocurrió en el barrio San Alejo. La agresora tiene 30 años y fue detenida. La víctima fue trasladada al Hospital Central de Pilar.",
-      "tema": "seguridad",
+      "resumen_corto": "No se requiere turno ni orden médica. La medida busca proteger a los grupos de riesgo. Una por una, todas las farmacias de Pilar habilitadas.",
+      "tema": "salud",
       "relevancia": 62
     },
     {
-      "titulo": "Identificaron al camionero que falleció en un incendio en el Parque Industrial",
+      "titulo": "Violó una perimetral y atacó a su expareja",
       "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/policiales/identificaron-al-camionero-que-fallecio-un-incendio-el-parque-industrial-n5468739",
+      "url": "https://www.pilaradiario.com/policiales/violo-una-perimetral-y-ataco-su-expareja-n5468752",
       "fecha_publicacion": "2026-03-30",
-      "resumen_corto": "Ardió la refinería Nueva Energía donde había tanques de nafta y gasoil. Dos operarios fueron trasladados al Hospital Central de Pilar.",
-      "tema": "seguridad",
-      "relevancia": 62
-    },
-    {
-      "titulo": "Tragedia en el Parque Industrial de Pilar: murió un operario tras una explosión",
-      "fuente": "Diario La Primera",
-      "url": "https://diariolaprimera.com.ar/contenido/9094/tragedia-en-el-parque-industrial-de-pilar-murio-un-operario-tras-una-explosion",
-      "fecha_publicacion": "2026-03-29",
-      "resumen_corto": "El incendio ocurrió en una refinería mientras cargaban combustible. Un trabajador falleció y otro sufrió graves heridas. El hecho reabre interrogantes sobre las condiciones de seguridad e...",
-      "tema": "seguridad",
+      "resumen_corto": "El hombre tenía una prohibición de acercamiento contra la mujer, que recibió golpes y amenazas.",
+      "tema": "servicios",
       "relevancia": 50
     },
     {
-      "titulo": "Real Pilar sufrió, lo dio vuelta y es único escolta",
+      "titulo": "Caravana y vigilia en homenaje a los Héroes de Malvinas",
       "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/la-liga/real-pilar-sufrio-lo-dio-vuelta-y-es-unico-escolta-n5468736",
-      "fecha_publicacion": "2026-03-29",
-      "resumen_corto": "Derrotó 3-2 a Argentino de Quilmes. Estuvo dos veces en desventaja y la pasó mal en defensa. Pero se recuperó para quedar a 4 puntos de Excursionistas. Marcaron David Achucarro, Marcos Ri...",
-      "tema": "obras",
-      "relevancia": 48
+      "url": "https://www.pilaradiario.com/informacion-general/caravana-y-vigilia-homenaje-los-heroes-malvinas-n5468749",
+      "fecha_publicacion": "2026-03-30",
+      "resumen_corto": "La convocatoria es abierta a vecinos de todo el distrito. Partirá a las 18 horas desde el Estacionamiento Municipal.",
+      "tema": "gobierno",
+      "relevancia": 62
+    },
+    {
+      "titulo": "Señalizaron la Escuela Nº36 de Del Viso en homenaje a dos exalumnas desaparecidas",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/informacion-general/senalizaron-la-escuela-n36-del-viso-homenaje-dos-exalumnas-desaparecidas-n5468747",
+      "fecha_publicacion": "2026-03-30",
+      "resumen_corto": "Allí estudiaron Dominga y Felicidad Abadía Crespo, secuestradas por la dictadura en 1977. El establecimiento lleva sus nombres.",
+      "tema": "educacion",
+      "relevancia": 57
     }
   ]
 }

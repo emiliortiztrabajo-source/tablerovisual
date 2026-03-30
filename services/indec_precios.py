@@ -4,7 +4,7 @@ import importlib.util
 import json
 import logging
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any
 from urllib.parse import urljoin
 
@@ -24,6 +24,8 @@ INDEC_PRECIOS_JSON_PATH = DATA_DIR / "indec_precios.json"
 INDEC_PRECIOS_SOURCE_URL = "https://www.indec.gob.ar/indec/web/Nivel3-Tema-3-5"
 INDEC_BASE_URL = "https://www.indec.gob.ar/"
 REQUEST_TIMEOUT_SECONDS = 25
+
+CACHE_TTL = timedelta(hours=24)
 
 INDICATOR_CONFIG = {
     "ipc": {
@@ -275,9 +277,26 @@ def update_indec_precios_json() -> dict[str, Any]:
         }
 
 
+def _is_cache_stale(cached: dict | None) -> bool:
+    if cached is None:
+        return True
+    raw = cached.get("ultima_actualizacion")
+    if not raw:
+        return True
+    try:
+        ts = datetime.fromisoformat(raw)
+        if ts.tzinfo is None:
+            from django.utils import timezone as tz
+            ts = tz.make_aware(ts)
+        from django.utils import timezone as tz
+        return (tz.now() - ts) >= CACHE_TTL
+    except (ValueError, TypeError):
+        return True
+
+
 def get_dashboard_indec_precios() -> dict[str, Any]:
     cached = read_indec_precios_json()
-    if cached is None:
+    if _is_cache_stale(cached):
         cached = update_indec_precios_json()["payload"]
 
     parsed_last_update = None

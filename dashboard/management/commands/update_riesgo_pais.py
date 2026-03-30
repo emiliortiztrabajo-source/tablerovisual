@@ -4,7 +4,7 @@ from services.riesgo_pais import update_riesgo_pais_json
 
 
 class Command(BaseCommand):
-    help = "Actualiza el JSON de Riesgo Pais desde Ambito."
+    help = "Actualiza el JSON de Riesgo Pais desde Dolarito."
 
     def handle(self, *args, **options):
         result = update_riesgo_pais_json()

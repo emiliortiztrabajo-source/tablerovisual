@@ -1,0 +1,13 @@
+[30/Mar/2026 14:55:40] "GET / HTTP/1.1" 302 0
+[30/Mar/2026 14:55:40] "GET /login/?next=/ HTTP/1.1" 200 2263
+[30/Mar/2026 14:55:40,366] - Broken pipe from ('127.0.0.1', 50761)
+[30/Mar/2026 14:57:51] "GET / HTTP/1.1" 302 0
+[30/Mar/2026 14:57:51] "GET /login/?next=/ HTTP/1.1" 200 2263
+[30/Mar/2026 14:57:51,609] - Broken pipe from ('127.0.0.1', 58129)
+[30/Mar/2026 14:58:13] "GET / HTTP/1.1" 302 0
+[30/Mar/2026 14:58:13] "GET /login/?next=/ HTTP/1.1" 200 2263
+[30/Mar/2026 14:58:13] "GET /static/css/dashboard.css HTTP/1.1" 200 21557
+Not Found: /favicon.ico
+[30/Mar/2026 14:58:13] "GET /favicon.ico HTTP/1.1" 404 2698
+[30/Mar/2026 14:58:16] "POST /login/?next=/ HTTP/1.1" 302 0
+[30/Mar/2026 14:58:31] "GET / HTTP/1.1" 200 78244

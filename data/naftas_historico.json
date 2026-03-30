@@ -1,0 +1,699 @@
+{
+  "ultima_actualizacion": "2026-03-30T17:48:34.213629+00:00",
+  "fuente": "https://surtidores.com.ar/precios/",
+  "datos": [
+    {
+      "fecha": "2018-01-01",
+      "label": "Ene/18",
+      "super": 23.57,
+      "premium": 27.33,
+      "gasoil": 20.79
+    },
+    {
+      "fecha": "2018-02-01",
+      "label": "Feb/18",
+      "super": 24.39,
+      "premium": 28.29,
+      "gasoil": 21.52
+    },
+    {
+      "fecha": "2018-03-01",
+      "label": "Mar/18",
+      "super": 24.39,
+      "premium": 28.29,
+      "gasoil": 21.52
+    },
+    {
+      "fecha": "2018-04-01",
+      "label": "Abr/18",
+      "super": 25.41,
+      "premium": 29.98,
+      "gasoil": 22.7
+    },
+    {
+      "fecha": "2018-05-01",
+      "label": "May/18",
+      "super": 25.41,
+      "premium": 29.98,
+      "gasoil": 22.7
+    },
+    {
+      "fecha": "2018-06-01",
+      "label": "Jun/18",
+      "super": 26.5,
+      "premium": 30.74,
+      "gasoil": 23.05
+    },
+    {
+      "fecha": "2018-07-01",
+      "label": "Jul/18",
+      "super": 27.83,
+      "premium": 33.2,
+      "gasoil": 24.2
+    },
+    {
+      "fecha": "2018-08-01",
+      "label": "Ago/18",
+      "super": 29.6,
+      "premium": 35.65,
+      "gasoil": 25.94
+    },
+    {
+      "fecha": "2018-09-01",
+      "label": "Sep/18",
+      "super": 33.23,
+      "premium": 40.02,
+      "gasoil": 28.89
+    },
+    {
+      "fecha": "2018-10-01",
+      "label": "Oct/18",
+      "super": 36.76,
+      "premium": 43.47,
+      "gasoil": 32.54
+    },
+    {
+      "fecha": "2018-11-01",
+      "label": "Nov/18",
+      "super": 37.59,
+      "premium": 44.22,
+      "gasoil": 33.76
+    },
+    {
+      "fecha": "2018-12-01",
+      "label": "Dic/18",
+      "super": 37.21,
+      "premium": 43.35,
+      "gasoil": 34.84
+    },
+    {
+      "fecha": "2019-01-01",
+      "label": "Ene/19",
+      "super": 37.21,
+      "premium": 43.35,
+      "gasoil": 34.84
+    },
+    {
+      "fecha": "2019-02-01",
+      "label": "Feb/19",
+      "super": 37.62,
+      "premium": 43.4,
+      "gasoil": 35.18
+    },
+    {
+      "fecha": "2019-03-01",
+      "label": "Mar/19",
+      "super": 38.67,
+      "premium": 44.62,
+      "gasoil": 36.17
+    },
+    {
+      "fecha": "2019-04-01",
+      "label": "Abr/19",
+      "super": 42.01,
+      "premium": 48.47,
+      "gasoil": 39.65
+    },
+    {
+      "fecha": "2019-05-01",
+      "label": "May/19",
+      "super": 42.01,
+      "premium": 48.47,
+      "gasoil": 39.65
+    },
+    {
+      "fecha": "2019-06-01",
+      "label": "Jun/19",
+      "super": 42.64,
+      "premium": 49.2,
+      "gasoil": 40.24
+    },
+    {
+      "fecha": "2019-07-01",
+      "label": "Jul/19",
+      "super": 43.91,
+      "premium": 50.43,
+      "gasoil": 42.96
+    },
+    {
+      "fecha": "2019-08-01",
+      "label": "Ago/19",
+      "super": 43.91,
+      "premium": 50.43,
+      "gasoil": 42.96
+    },
+    {
+      "fecha": "2019-09-01",
+      "label": "Sep/19",
+      "super": 45.49,
+      "premium": 52.49,
+      "gasoil": 42.59
+    },
+    {
+      "fecha": "2019-10-01",
+      "label": "Oct/19",
+      "super": 45.59,
+      "premium": 52.69,
+      "gasoil": 42.69
+    },
+    {
+      "fecha": "2019-11-01",
+      "label": "Nov/19",
+      "super": 50.19,
+      "premium": 57.94,
+      "gasoil": 46.99
+    },
+    {
+      "fecha": "2019-12-01",
+      "label": "Dic/19",
+      "super": 53.34,
+      "premium": 61.54,
+      "gasoil": 49.94
+    },
+    {
+      "fecha": "2020-01-01",
+      "label": "Ene/20",
+      "super": 53.34,
+      "premium": 61.54,
+      "gasoil": 50.04
+    },
+    {
+      "fecha": "2020-02-01",
+      "label": "Feb/20",
+      "super": 53.34,
+      "premium": 61.54,
+      "gasoil": 50.04
+    },
+    {
+      "fecha": "2020-03-01",
+      "label": "Mar/20",
+      "super": 53.47,
+      "premium": 61.69,
+      "gasoil": 50.04
+    },
+    {
+      "fecha": "2020-04-01",
+      "label": "Abr/20",
+      "super": 53.47,
+      "premium": 61.69,
+      "gasoil": 50.04
+    },
+    {
+      "fecha": "2020-05-01",
+      "label": "May/20",
+      "super": 53.47,
+      "premium": 61.69,
+      "gasoil": 50.04
+    },
+    {
+      "fecha": "2020-06-01",
+      "label": "Jun/20",
+      "super": 53.47,
+      "premium": 61.69,
+      "gasoil": 50.04
+    },
+    {
+      "fecha": "2020-07-01",
+      "label": "Jul/20",
+      "super": 53.47,
+      "premium": 61.69,
+      "gasoil": 50.04
+    },
+    {
+      "fecha": "2020-08-01",
+      "label": "Ago/20",
+      "super": 56.68,
+      "premium": 65.39,
+      "gasoil": 52.94
+    },
+    {
+      "fecha": "2020-09-01",
+      "label": "Sep/20",
+      "super": 59.49,
+      "premium": 68.63,
+      "gasoil": 55.56
+    },
+    {
+      "fecha": "2020-10-01",
+      "label": "Oct/20",
+      "super": 61.84,
+      "premium": 71.34,
+      "gasoil": 57.75
+    },
+    {
+      "fecha": "2020-11-01",
+      "label": "Nov/20",
+      "super": 63.6,
+      "premium": 73.4,
+      "gasoil": 59.4
+    },
+    {
+      "fecha": "2020-12-01",
+      "label": "Dic/20",
+      "super": 67.1,
+      "premium": 77.4,
+      "gasoil": 62.7
+    },
+    {
+      "fecha": "2021-01-01",
+      "label": "Ene/21",
+      "super": 71.9,
+      "premium": 83.1,
+      "gasoil": 66.9
+    },
+    {
+      "fecha": "2021-02-01",
+      "label": "Feb/21",
+      "super": 74.6,
+      "premium": 85.7,
+      "gasoil": 70.2
+    },
+    {
+      "fecha": "2021-03-01",
+      "label": "Mar/21",
+      "super": 80.5,
+      "premium": 92.9,
+      "gasoil": 75.7
+    },
+    {
+      "fecha": "2021-04-01",
+      "label": "Abr/21",
+      "super": 85.7,
+      "premium": 99.3,
+      "gasoil": 80.5
+    },
+    {
+      "fecha": "2021-05-01",
+      "label": "May/21",
+      "super": 90.4,
+      "premium": 104.8,
+      "gasoil": 84.8
+    },
+    {
+      "fecha": "2021-06-01",
+      "label": "Jun/21",
+      "super": 90.4,
+      "premium": 104.8,
+      "gasoil": 84.9
+    },
+    {
+      "fecha": "2021-07-01",
+      "label": "Jul/21",
+      "super": 90.4,
+      "premium": 104.8,
+      "gasoil": 84.9
+    },
+    {
+      "fecha": "2021-08-01",
+      "label": "Ago/21",
+      "super": 90.4,
+      "premium": 104.8,
+      "gasoil": 84.9
+    },
+    {
+      "fecha": "2021-09-01",
+      "label": "Sep/21",
+      "super": 90.4,
+      "premium": 104.8,
+      "gasoil": 84.9
+    },
+    {
+      "fecha": "2021-10-01",
+      "label": "Oct/21",
+      "super": 90.4,
+      "premium": 104.8,
+      "gasoil": 84.9
+    },
+    {
+      "fecha": "2021-11-01",
+      "label": "Nov/21",
+      "super": 90.4,
+      "premium": 104.8,
+      "gasoil": 84.9
+    },
+    {
+      "fecha": "2021-12-01",
+      "label": "Dic/21",
+      "super": 90.4,
+      "premium": 104.8,
+      "gasoil": 84.9
+    },
+    {
+      "fecha": "2022-01-01",
+      "label": "Ene/22",
+      "super": 90.4,
+      "premium": 104.8,
+      "gasoil": 84.9
+    },
+    {
+      "fecha": "2022-02-01",
+      "label": "Feb/22",
+      "super": 99.0,
+      "premium": 116.9,
+      "gasoil": 93.0
+    },
+    {
+      "fecha": "2022-03-01",
+      "label": "Mar/22",
+      "super": 109.9,
+      "premium": 132.1,
+      "gasoil": 103.2
+    },
+    {
+      "fecha": "2022-04-01",
+      "label": "Abr/22",
+      "super": 109.9,
+      "premium": 132.1,
+      "gasoil": 103.2
+    },
+    {
+      "fecha": "2022-05-01",
+      "label": "May/22",
+      "super": 120.3,
+      "premium": 147.3,
+      "gasoil": 113.4
+    },
+    {
+      "fecha": "2022-06-01",
+      "label": "Jun/22",
+      "super": 120.3,
+      "premium": 147.3,
+      "gasoil": 128.1
+    },
+    {
+      "fecha": "2022-07-01",
+      "label": "Jul/22",
+      "super": 120.3,
+      "premium": 147.3,
+      "gasoil": 128.1
+    },
+    {
+      "fecha": "2022-08-01",
+      "label": "Ago/22",
+      "super": 131.6,
+      "premium": 161.1,
+      "gasoil": 136.2
+    },
+    {
+      "fecha": "2022-09-01",
+      "label": "Sep/22",
+      "super": 131.6,
+      "premium": 161.1,
+      "gasoil": 136.2
+    },
+    {
+      "fecha": "2022-10-01",
+      "label": "Oct/22",
+      "super": 138.2,
+      "premium": 169.2,
+      "gasoil": 145.7
+    },
+    {
+      "fecha": "2022-11-01",
+      "label": "Nov/22",
+      "super": 145.1,
+      "premium": 177.7,
+      "gasoil": 155.9
+    },
+    {
+      "fecha": "2022-12-01",
+      "label": "Dic/22",
+      "super": 150.9,
+      "premium": 185.9,
+      "gasoil": 162.1
+    },
+    {
+      "fecha": "2023-01-01",
+      "label": "Ene/23",
+      "super": 156.8,
+      "premium": 197.4,
+      "gasoil": 168.4
+    },
+    {
+      "fecha": "2023-02-01",
+      "label": "Feb/23",
+      "super": 163.1,
+      "premium": 209.1,
+      "gasoil": 175.1
+    },
+    {
+      "fecha": "2023-03-01",
+      "label": "Mar/23",
+      "super": 169.3,
+      "premium": 217.0,
+      "gasoil": 181.8
+    },
+    {
+      "fecha": "2023-04-01",
+      "label": "Abr/23",
+      "super": 176.1,
+      "premium": 225.7,
+      "gasoil": 189.1
+    },
+    {
+      "fecha": "2023-05-01",
+      "label": "May/23",
+      "super": 184.7,
+      "premium": 232.7,
+      "gasoil": 198.4
+    },
+    {
+      "fecha": "2023-06-01",
+      "label": "Jun/23",
+      "super": 195.8,
+      "premium": 251.3,
+      "gasoil": 210.3
+    },
+    {
+      "fecha": "2023-07-01",
+      "label": "Jul/23",
+      "super": 204.6,
+      "premium": 262.6,
+      "gasoil": 219.8
+    },
+    {
+      "fecha": "2023-08-01",
+      "label": "Ago/23",
+      "super": 240.5,
+      "premium": 308.7,
+      "gasoil": 258.4
+    },
+    {
+      "fecha": "2023-09-01",
+      "label": "Sep/23",
+      "super": 240.5,
+      "premium": 308.7,
+      "gasoil": 258.4
+    },
+    {
+      "fecha": "2023-10-01",
+      "label": "Oct/23",
+      "super": 248.0,
+      "premium": 318.0,
+      "gasoil": 266.0
+    },
+    {
+      "fecha": "2023-11-01",
+      "label": "Nov/23",
+      "super": 311.0,
+      "premium": 395.0,
+      "gasoil": 328.0
+    },
+    {
+      "fecha": "2023-12-01",
+      "label": "Dic/23",
+      "super": 553.0,
+      "premium": 684.0,
+      "gasoil": 591.0
+    },
+    {
+      "fecha": "2024-01-01",
+      "label": "Ene/24",
+      "super": 699.0,
+      "premium": 862.0,
+      "gasoil": 736.0
+    },
+    {
+      "fecha": "2024-02-01",
+      "label": "Feb/24",
+      "super": 744.0,
+      "premium": 918.0,
+      "gasoil": 784.0
+    },
+    {
+      "fecha": "2024-03-01",
+      "label": "Mar/24",
+      "super": 800.0,
+      "premium": 987.0,
+      "gasoil": 843.0
+    },
+    {
+      "fecha": "2024-04-01",
+      "label": "Abr/24",
+      "super": 837.0,
+      "premium": 1033.0,
+      "gasoil": 883.0
+    },
+    {
+      "fecha": "2024-05-01",
+      "label": "May/24",
+      "super": 870.0,
+      "premium": 1074.0,
+      "gasoil": 918.0
+    },
+    {
+      "fecha": "2024-06-01",
+      "label": "Jun/24",
+      "super": 905.0,
+      "premium": 1117.0,
+      "gasoil": 941.0
+    },
+    {
+      "fecha": "2024-07-01",
+      "label": "Jul/24",
+      "super": 941.0,
+      "premium": 1162.0,
+      "gasoil": 979.0
+    },
+    {
+      "fecha": "2024-08-01",
+      "label": "Ago/24",
+      "super": 992.0,
+      "premium": 1226.0,
+      "gasoil": 1032.0
+    },
+    {
+      "fecha": "2024-09-01",
+      "label": "Sep/24",
+      "super": 1059.0,
+      "premium": 1309.0,
+      "gasoil": 1084.0
+    },
+    {
+      "fecha": "2024-10-01",
+      "label": "Oct/24",
+      "super": 1048.0,
+      "premium": 1296.0,
+      "gasoil": 1062.0
+    },
+    {
+      "fecha": "2024-11-01",
+      "label": "Nov/24",
+      "super": 1077.0,
+      "premium": 1332.0,
+      "gasoil": 1092.0
+    },
+    {
+      "fecha": "2024-12-01",
+      "label": "Dic/24",
+      "super": 1108.0,
+      "premium": 1370.0,
+      "gasoil": 1123.0
+    },
+    {
+      "fecha": "2025-01-01",
+      "label": "Ene/25",
+      "super": 1128.0,
+      "premium": 1394.0,
+      "gasoil": 1143.0
+    },
+    {
+      "fecha": "2025-02-01",
+      "label": "Feb/25",
+      "super": 1151.0,
+      "premium": 1422.0,
+      "gasoil": 1170.0
+    },
+    {
+      "fecha": "2025-03-01",
+      "label": "Mar/25",
+      "super": 1173.0,
+      "premium": 1449.0,
+      "gasoil": 1188.0
+    },
+    {
+      "fecha": "2025-04-01",
+      "label": "Abr/25",
+      "super": 1194.0,
+      "premium": 1474.0,
+      "gasoil": 1209.0
+    },
+    {
+      "fecha": "2025-05-01",
+      "label": "May/25",
+      "super": 1173.0,
+      "premium": 1389.0,
+      "gasoil": 1178.0
+    },
+    {
+      "fecha": "2025-06-01",
+      "label": "Jun/25",
+      "super": 1186.0,
+      "premium": 1405.0,
+      "gasoil": 1191.0
+    },
+    {
+      "fecha": "2025-07-01",
+      "label": "Jul/25",
+      "super": 1246.0,
+      "premium": 1476.0,
+      "gasoil": 1251.0
+    },
+    {
+      "fecha": "2025-08-01",
+      "label": "Ago/25",
+      "super": 1269.0,
+      "premium": 1489.0,
+      "gasoil": 1274.0
+    },
+    {
+      "fecha": "2025-09-01",
+      "label": "Sep/25",
+      "super": 1349.0,
+      "premium": 1618.0,
+      "gasoil": 1377.0
+    },
+    {
+      "fecha": "2025-10-01",
+      "label": "Oct/25",
+      "super": 1391.0,
+      "premium": 1651.0,
+      "gasoil": 1408.0
+    },
+    {
+      "fecha": "2025-11-01",
+      "label": "Nov/25",
+      "super": 1497.0,
+      "premium": 1738.0,
+      "gasoil": 1509.0
+    },
+    {
+      "fecha": "2025-12-01",
+      "label": "Dic/25",
+      "super": 1611.0,
+      "premium": 1835.0,
+      "gasoil": 1603.0
+    },
+    {
+      "fecha": "2026-01-01",
+      "label": "Ene/26",
+      "super": 1566.0,
+      "premium": 1780.0,
+      "gasoil": 1601.0
+    },
+    {
+      "fecha": "2026-02-01",
+      "label": "Feb/26",
+      "super": 1609.0,
+      "premium": 1845.0,
+      "gasoil": 1658.0
+    },
+    {
+      "fecha": "2026-03-01",
+      "label": "Mar/26",
+      "super": 1999.0,
+      "premium": 2207.0,
+      "gasoil": 2065.0
+    }
+  ]
+}
