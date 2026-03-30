@@ -1,52 +1,52 @@
 {
-  "ultima_actualizacion": "2026-03-27T13:31:52-03:00",
+  "ultima_actualizacion": "2026-03-30T10:39:58-03:00",
   "cantidad_noticias": 5,
   "tema_dominante": "seguridad",
   "noticias": [
     {
-      "titulo": "Ladrón armado le robó la bicicleta a un menor de 13 años: vecinos lo redujeron y lo entregaron a la policía",
+      "titulo": "La semana corta empieza en Pilar con un lunes gris, húmedo y con probabilidades de lluvias",
       "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/policiales/ladron-armado-le-robo-la-bicicleta-un-menor-13-anos-vecinos-lo-redujeron-y-lo-entregaron-la-policia-n5468694",
-      "fecha_publicacion": "2026-03-27",
-      "resumen_corto": "Lagomarsino Ladrón armado le robó la bicicleta a un menor de 13 años: vecinos lo redujeron y lo entregaron a la policía Lo amenazó con un cuchillo y le sustrajo el rodado. Testigos lograr...",
-      "tema": "seguridad",
-      "relevancia": 69
-    },
-    {
-      "titulo": "Cayó un sujeto con dos pedidos de captura por robo agravado",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/policiales/cayo-un-sujeto-dos-pedidos-captura-robo-agravado-n5468692",
-      "fecha_publicacion": "2026-03-27",
-      "resumen_corto": "Fue detenido por la policía cuando circulaba en actitud sospechosa. Estaba prófugo desde 2020.",
-      "tema": "seguridad",
-      "relevancia": 76
-    },
-    {
-      "titulo": "Su pareja lo denunció por violencia de género: la policía halló plantas de marihuana en su casa",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/policiales/su-pareja-lo-denuncio-violencia-genero-la-policia-hallo-plantas-marihuana-su-casa-n5468688",
-      "fecha_publicacion": "2026-03-27",
-      "resumen_corto": "Ocurrió en el barrio La Loma. Golpeó a su mujer y le rompió el celular contra el piso. Tras la denuncia, la policía halló una plantación de cannabis.",
-      "tema": "general",
-      "relevancia": 58
-    },
-    {
-      "titulo": "Sheraton Pilar celebra Semana Santa con una propuesta especial de hospedaje y almuerzo de Pascua",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/sociedad/sheraton-pilar-celebra-semana-santa-una-propuesta-especial-hospedaje-y-almuerzo-pascua-n5468690",
-      "fecha_publicacion": "2026-03-27",
-      "resumen_corto": "El hotel presenta paquetes de estadía para el fin de semana largo de abril y un tradicional almuerzo de Pascua con actividades para toda la familia.",
-      "tema": "general",
-      "relevancia": 53
-    },
-    {
-      "titulo": "Clima en Pilar: la semana termina con un viernes inestable a la espera de las lluvias",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/informacion-general/clima-pilar-la-semana-termina-un-viernes-inestable-la-espera-las-lluvias-n5468686",
-      "fecha_publicacion": "2026-03-27",
-      "resumen_corto": "El Servicio Meteorológico Nacional anticipa una jornada de mucha humedad en Pilar y una temperatura máxima de 26°C. En los próximos días volverá el calor.",
+      "url": "https://www.pilaradiario.com/informacion-general/la-semana-corta-empieza-pilar-un-lunes-gris-humedo-y-probabilidades-lluvias-n5468742",
+      "fecha_publicacion": "2026-03-30",
+      "resumen_corto": "Tras un amanecer con neblina y lloviznas, el Servicio Meteorológico Nacional anuncia chaparrones y temperatura máxima de 27°C en Pilar y la región.",
       "tema": "servicios",
       "relevancia": 58
+    },
+    {
+      "titulo": "Una mujer atacó a otra y le cortó la cara con un cuchillo",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/policiales/una-mujer-ataco-otra-y-le-corto-la-cara-un-cuchillo-n5468741",
+      "fecha_publicacion": "2026-03-30",
+      "resumen_corto": "Ocurrió en el barrio San Alejo. La agresora tiene 30 años y fue detenida. La víctima fue trasladada al Hospital Central de Pilar.",
+      "tema": "seguridad",
+      "relevancia": 62
+    },
+    {
+      "titulo": "Identificaron al camionero que falleció en un incendio en el Parque Industrial",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/policiales/identificaron-al-camionero-que-fallecio-un-incendio-el-parque-industrial-n5468739",
+      "fecha_publicacion": "2026-03-30",
+      "resumen_corto": "Ardió la refinería Nueva Energía donde había tanques de nafta y gasoil. Dos operarios fueron trasladados al Hospital Central de Pilar.",
+      "tema": "seguridad",
+      "relevancia": 62
+    },
+    {
+      "titulo": "Tragedia en el Parque Industrial de Pilar: murió un operario tras una explosión",
+      "fuente": "Diario La Primera",
+      "url": "https://diariolaprimera.com.ar/contenido/9094/tragedia-en-el-parque-industrial-de-pilar-murio-un-operario-tras-una-explosion",
+      "fecha_publicacion": "2026-03-29",
+      "resumen_corto": "El incendio ocurrió en una refinería mientras cargaban combustible. Un trabajador falleció y otro sufrió graves heridas. El hecho reabre interrogantes sobre las condiciones de seguridad e...",
+      "tema": "seguridad",
+      "relevancia": 50
+    },
+    {
+      "titulo": "Real Pilar sufrió, lo dio vuelta y es único escolta",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/la-liga/real-pilar-sufrio-lo-dio-vuelta-y-es-unico-escolta-n5468736",
+      "fecha_publicacion": "2026-03-29",
+      "resumen_corto": "Derrotó 3-2 a Argentino de Quilmes. Estuvo dos veces en desventaja y la pasó mal en defensa. Pero se recuperó para quedar a 4 puntos de Excursionistas. Marcaron David Achucarro, Marcos Ri...",
+      "tema": "obras",
+      "relevancia": 48
     }
   ]
 }
