@@ -1052,3 +1052,24 @@ body {
         height: 260px;
     }
 }
+
+/* ── Footer / Términos y condiciones ── */
+.dashboard-footer {
+    margin-top: 2.5rem;
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 12px;
+}
+
+.footer-disclaimer {
+    font-size: 0.78rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+}
+
+.footer-disclaimer strong {
+    color: #94a3b8;
+}
