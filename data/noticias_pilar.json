@@ -1,52 +1,52 @@
 {
-  "ultima_actualizacion": "2026-03-30T15:18:58-03:00",
+  "ultima_actualizacion": "2026-03-31T14:06:30-03:00",
   "cantidad_noticias": 5,
-  "tema_dominante": "servicios",
+  "tema_dominante": "seguridad",
   "noticias": [
     {
-      "titulo": "Pilar se prepara para una jornada de memoria y homenaje a los héroes de Malvinas",
-      "fuente": "Diario Resumen",
-      "url": "https://diarioresumen.com.ar/politica/pilar-se-prepara-para-una-jornada-de-memoria-y-homenaje-a-los-heroes-de-malvinas",
-      "fecha_publicacion": "2026-03-30",
-      "resumen_corto": "En el marco de un nuevo aniversario del 2 de abril, el distrito organizará una caravana y una vigilia abierta a la comunidad. La propuesta busca reunir a vecinos, veteranos y familiares e...",
-      "tema": "servicios",
+      "titulo": "En un allanamiento, secuestran drogas, teléfonos robados y un arma: un detenido",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/policiales/en-un-allanamiento-secuestran-drogas-telefonos-robados-y-un-arma-un-detenido-n5468783",
+      "fecha_publicacion": "2026-03-31",
+      "resumen_corto": "Del Viso En un allanamiento, secuestran drogas, teléfonos robados y un arma: un detenido Desde abril Autorizan nuevos aumentos en las cuotas de colegios privados bonaerenses",
+      "tema": "seguridad",
+      "relevancia": 76
+    },
+    {
+      "titulo": "Denunciados por un comprador, detienen a dos dealers y secuestran varias dosis de estupefacientes",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/policiales/denunciados-un-comprador-detienen-dos-dealers-y-secuestran-varias-dosis-estupefacientes-n5468782",
+      "fecha_publicacion": "2026-03-31",
+      "resumen_corto": "El denunciante afirmó que en el momento en el que adquiría droga, fue golpeado por los sujetos que además le robaron la bicicleta. Intentaron darse a la fuga pero fueron arrestados.",
+      "tema": "seguridad",
       "relevancia": 54
     },
     {
-      "titulo": "Ya está disponible en farmacias la vacuna antigripal para afiliados de PAMI",
+      "titulo": "Detienen a dos sujetos con más de 200 gramos de marihuana",
       "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/informacion-general/ya-esta-disponible-farmacias-la-vacuna-antigripal-afiliados-pami-n5468754",
-      "fecha_publicacion": "2026-03-30",
-      "resumen_corto": "No se requiere turno ni orden médica. La medida busca proteger a los grupos de riesgo. Una por una, todas las farmacias de Pilar habilitadas.",
+      "url": "https://www.pilaradiario.com/policiales/detienen-dos-sujetos-mas-200-gramos-marihuana-n5468779",
+      "fecha_publicacion": "2026-03-31",
+      "resumen_corto": "Fueron divisados por las cámaras del COM mientras fumaban en la plaza ubicada frente a la estación de trenes. Son oriundos del barrio Pinazo.",
+      "tema": "seguridad",
+      "relevancia": 69
+    },
+    {
+      "titulo": "Reserva Natural de Pilar: invitan a una nueva clase abierta de Tai Chi – Pilar de Todos",
+      "fuente": "Pilar de Todos",
+      "url": "https://www.pilardetodos.com.ar/secciones/noticias/sociedad/reserva-natural-de-pilar-invitan-a-una-nueva-clase-abierta-de-tai-chi",
+      "fecha_publicacion": "2026-03-31",
+      "resumen_corto": "La actividad será gratuita y sin inscripción previa. Se realizará al aire libre y está dirigida a personas sin experiencia.",
       "tema": "salud",
-      "relevancia": 62
+      "relevancia": 61
     },
     {
-      "titulo": "Violó una perimetral y atacó a su expareja",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/policiales/violo-una-perimetral-y-ataco-su-expareja-n5468752",
-      "fecha_publicacion": "2026-03-30",
-      "resumen_corto": "El hombre tenía una prohibición de acercamiento contra la mujer, que recibió golpes y amenazas.",
-      "tema": "servicios",
-      "relevancia": 50
-    },
-    {
-      "titulo": "Caravana y vigilia en homenaje a los Héroes de Malvinas",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/informacion-general/caravana-y-vigilia-homenaje-los-heroes-malvinas-n5468749",
-      "fecha_publicacion": "2026-03-30",
-      "resumen_corto": "La convocatoria es abierta a vecinos de todo el distrito. Partirá a las 18 horas desde el Estacionamiento Municipal.",
-      "tema": "gobierno",
-      "relevancia": 62
-    },
-    {
-      "titulo": "Señalizaron la Escuela Nº36 de Del Viso en homenaje a dos exalumnas desaparecidas",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/informacion-general/senalizaron-la-escuela-n36-del-viso-homenaje-dos-exalumnas-desaparecidas-n5468747",
-      "fecha_publicacion": "2026-03-30",
-      "resumen_corto": "Allí estudiaron Dominga y Felicidad Abadía Crespo, secuestradas por la dictadura en 1977. El establecimiento lleva sus nombres.",
-      "tema": "educacion",
-      "relevancia": 57
+      "titulo": "Pilar: 42 detenidos en operativos de seguridad del fin de semana – Pilar de Todos",
+      "fuente": "Pilar de Todos",
+      "url": "https://www.pilardetodos.com.ar/secciones/noticias/policiales/pilar-42-detenidos-en-operativos-de-seguridad-del-fin-de-semana",
+      "fecha_publicacion": "2026-03-31",
+      "resumen_corto": "Dos tenían pedido de captura. En Del Viso, aprehendieron a dos hombres con más de 200 gramos de marihuana.",
+      "tema": "seguridad",
+      "relevancia": 82
     }
   ]
 }

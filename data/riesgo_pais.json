@@ -1,15 +1,15 @@
 {
-  "ultima_actualizacion": "2026-03-30T15:16:13-03:00",
+  "ultima_actualizacion": "2026-03-31T14:06:03-03:00",
   "fuente": "https://www.dolarito.ar/indices/riesgo-pais",
   "source_label": "Dolarito",
   "api_url": "https://api.dolarito.ar/api/frontend/indices/riesgoPais",
   "riesgo_pais": {
-    "valor": 615,
-    "variacion": 5.49,
-    "cierre_anterior": 583,
-    "variacion_puntos": 32,
-    "fecha_dato": "2026-03-27",
-    "fecha_scraping": "2026-03-27T00:00:00-03:00"
+    "valor": 637,
+    "variacion": 3.58,
+    "cierre_anterior": 615,
+    "variacion_puntos": 22,
+    "fecha_dato": "2026-03-30",
+    "fecha_scraping": "2026-03-30T00:00:00-03:00"
   },
   "historico": [
     {
@@ -28171,6 +28171,10 @@
     {
       "fecha": "2026-03-27",
       "valor": 615
+    },
+    {
+      "fecha": "2026-03-30",
+      "valor": 637
     }
   ]
 }
