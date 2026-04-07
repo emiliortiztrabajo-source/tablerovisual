@@ -1,52 +1,52 @@
 {
-  "ultima_actualizacion": "2026-03-31T14:06:30-03:00",
+  "ultima_actualizacion": "2026-04-06T23:27:30-03:00",
   "cantidad_noticias": 5,
-  "tema_dominante": "seguridad",
+  "tema_dominante": "gobierno",
   "noticias": [
     {
-      "titulo": "En un allanamiento, secuestran drogas, teléfonos robados y un arma: un detenido",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/policiales/en-un-allanamiento-secuestran-drogas-telefonos-robados-y-un-arma-un-detenido-n5468783",
-      "fecha_publicacion": "2026-03-31",
-      "resumen_corto": "Del Viso En un allanamiento, secuestran drogas, teléfonos robados y un arma: un detenido Desde abril Autorizan nuevos aumentos en las cuotas de colegios privados bonaerenses",
-      "tema": "seguridad",
-      "relevancia": 76
-    },
-    {
-      "titulo": "Denunciados por un comprador, detienen a dos dealers y secuestran varias dosis de estupefacientes",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/policiales/denunciados-un-comprador-detienen-dos-dealers-y-secuestran-varias-dosis-estupefacientes-n5468782",
-      "fecha_publicacion": "2026-03-31",
-      "resumen_corto": "El denunciante afirmó que en el momento en el que adquiría droga, fue golpeado por los sujetos que además le robaron la bicicleta. Intentaron darse a la fuga pero fueron arrestados.",
-      "tema": "seguridad",
-      "relevancia": 54
-    },
-    {
-      "titulo": "Detienen a dos sujetos con más de 200 gramos de marihuana",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/policiales/detienen-dos-sujetos-mas-200-gramos-marihuana-n5468779",
-      "fecha_publicacion": "2026-03-31",
-      "resumen_corto": "Fueron divisados por las cámaras del COM mientras fumaban en la plaza ubicada frente a la estación de trenes. Son oriundos del barrio Pinazo.",
-      "tema": "seguridad",
-      "relevancia": 69
-    },
-    {
-      "titulo": "Reserva Natural de Pilar: invitan a una nueva clase abierta de Tai Chi – Pilar de Todos",
+      "titulo": "El intendente Achával destacó la labor de los merenderos – Pilar de Todos",
       "fuente": "Pilar de Todos",
-      "url": "https://www.pilardetodos.com.ar/secciones/noticias/sociedad/reserva-natural-de-pilar-invitan-a-una-nueva-clase-abierta-de-tai-chi",
-      "fecha_publicacion": "2026-03-31",
-      "resumen_corto": "La actividad será gratuita y sin inscripción previa. Se realizará al aire libre y está dirigida a personas sin experiencia.",
-      "tema": "salud",
+      "url": "https://www.pilardetodos.com.ar/secciones/noticias/sociedad/el-intendente-achaval-destaco-la-labor-de-los-merenderos",
+      "fecha_publicacion": "2026-04-06",
+      "resumen_corto": "Visitó “Mana” de Presidente Derqui, donde se reunió con sus responsables.",
+      "tema": "gobierno",
+      "relevancia": 78
+    },
+    {
+      "titulo": "Pilar: detuvieron a 53 personas; tres tenían pedido de captura activo – Pilar de Todos",
+      "fuente": "Pilar de Todos",
+      "url": "https://www.pilardetodos.com.ar/secciones/noticias/policiales/pilar-detuvieron-a-53-personas-y-tres-tenian-pedido-de-captura-activo",
+      "fecha_publicacion": "2026-04-06",
+      "resumen_corto": "Se llevaron a cabo 15 operativos y se identificaron más de 5.500 personas.",
+      "tema": "seguridad",
+      "relevancia": 89
+    },
+    {
+      "titulo": "Pilar: robaron una moto y fueron detenidos tras un seguimiento por cámaras de seguridad – Pilar de Todos",
+      "fuente": "Pilar de Todos",
+      "url": "https://www.pilardetodos.com.ar/secciones/noticias/policiales/pilar-robaron-una-moto-y-fueron-detenidos-tras-un-seguimiento-por-camaras-de-seguridad",
+      "fecha_publicacion": "2026-04-06",
+      "resumen_corto": "El monitoreo en tiempo real permitió localizar a los sospechosos y recuperar el vehículo.",
+      "tema": "seguridad",
       "relevancia": 61
     },
     {
-      "titulo": "Pilar: 42 detenidos en operativos de seguridad del fin de semana – Pilar de Todos",
-      "fuente": "Pilar de Todos",
-      "url": "https://www.pilardetodos.com.ar/secciones/noticias/policiales/pilar-42-detenidos-en-operativos-de-seguridad-del-fin-de-semana",
-      "fecha_publicacion": "2026-03-31",
-      "resumen_corto": "Dos tenían pedido de captura. En Del Viso, aprehendieron a dos hombres con más de 200 gramos de marihuana.",
-      "tema": "seguridad",
-      "relevancia": 82
+      "titulo": "Achával destacó el rol de las mujeres que llevan adelante los merenderos",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/informacion-general/achaval-destaco-el-rol-las-mujeres-que-llevan-adelante-los-merenderos-n5468899",
+      "fecha_publicacion": "2026-04-06",
+      "resumen_corto": "En Rivera Villate Achával destacó el rol de las mujeres que llevan adelante los merenderos Fútbol-Conmebol El fútbol de Pilar juega en las copas internacionales",
+      "tema": "gobierno",
+      "relevancia": 79
+    },
+    {
+      "titulo": "El fútbol de Pilar juega en las copas internacionales",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/la-liga/el-futbol-pilar-juega-las-copas-internacionales-n5468897",
+      "fecha_publicacion": "2026-04-06",
+      "resumen_corto": "Arranca la Libertadores con Camilo Rey (Boca), Martín Gómez (U. Católica de Chile) y Augusto Lotti (Platense). Benjamín Figueredo e Ignacio Peluffo (Tigre) anotados para la Sudamericana.",
+      "tema": "educacion",
+      "relevancia": 57
     }
   ]
 }

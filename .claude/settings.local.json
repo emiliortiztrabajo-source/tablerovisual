@@ -20,7 +20,9 @@
       "Bash(python -c \"import django; django.setup\\(\\); print\\(''OK''\\)\")",
       "Bash(DJANGO_SETTINGS_MODULE=project.settings python manage.py check)",
       "Bash(.venv/Scripts/python.exe manage.py runserver 9000)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:9000/)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:9000/)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)"
     ]
   }
 }

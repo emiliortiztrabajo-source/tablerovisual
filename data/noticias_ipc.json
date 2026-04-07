@@ -1,18 +1,18 @@
 {
-  "ultima_actualizacion": "2026-03-19T13:43:10-03:00",
+  "ultima_actualizacion": "2026-04-06T23:27:37-03:00",
   "dato_consolidado": 31.4,
   "coincidencias": 2,
   "total_noticias_analizadas": 5,
   "nivel_confianza": "media",
   "noticias": [
     {
-      "titulo": "Indice de precios al consumidor",
-      "fuente": "INDEC",
-      "url": "https://www.indec.gob.ar/Nivel4/Tema/3/5/31",
+      "titulo": "Se sitúa la inflación argentina en 32.4% interanual en enero -",
+      "fuente": "Universidad de Colima",
+      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5UYjU1UFV3RjVlczkzbGFzSWtaVEd3NDAxSjlLZDdlbnlkNWF4bnRSejhSMzlxOEN2aXpZMVBpd1NId1EwN1B6Y3BvQTI0bkU?oc=5",
       "fecha_publicacion": "2026-02-10",
-      "resumen_corto": "El INDEC publico el informe tecnico del IPC de enero con una variacion mensual de 2,9% y el detalle oficial por rubros y regiones.",
-      "ipc_interanual_detectado": null,
-      "relevancia": 96
+      "resumen_corto": "Se sitúa la inflación argentina en 32.4% interanual en enero - Universidad de Colima",
+      "ipc_interanual_detectado": 32.4,
+      "relevancia": 50
     },
     {
       "titulo": "La inflación acelera en Argentina y alcanza el 31,4% interanual",
@@ -24,15 +24,6 @@
       "relevancia": 50
     },
     {
-      "titulo": "Google News",
-      "fuente": "Infobae",
-      "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNUF9qRjFEWVZRbWtZbDJQQlFPeUFfV0NHek5jVXg1elh2VmNWODF6dWlnRmJrRmJ2dFlaUFFfVE5Yb2xmeWNFd1VYRUEwTGxLNmRzd0ZGM1R1T1djeTRDQVRyTjNQdXppcW5EaThpczV3RElndWx2ZWw1VUJsQkNBU3MzRkpsTGxWcHFRUi1ZSWoxLXpFSVd5UFFtTmtwWE1zTVE5UHhZaENKbTdZZjRFNlR6QlNSLUo3M2owXzV0V29Kc1Fwd0wyLVVxMDZVcjY5SHdJWldmQkhONjVubkZNRC1jd2I0enN2QXfSAYQCQVVfeXFMTlJ4SXpoS1NuTDhPa2pteFFRNTN2UUlfOTYtMUcyeTlUbEQ4WVRldm1uNTM4VGhxMVdZZDQ2b1B3WmVoUUs5ZFppbXVPbV9vX3o1M0R5MFc5UjR1NXNSbHZpMERDM0dyWEdlQTVsY1lVcGViUjRyanJGLV81TmRRanh1SWE4YVBaWXdSSndrTGxVVEFiWUV5Yjc2dHhrOVQ0ZmZvQXhfNFNqN3lTTG1BZGlxMlhNRzFfZGVJaTMzYTRvMHVTeUxwSG9qX1k1cmtheEktTy1oWHJFSWdWRkVsVlZxVjNpNkR5T1c1T2hWUGpfVms5bHdQZ2lNOE9QY3dMM2NUR0I?oc=5&hl=en-US&gl=US&ceid=US:en",
-      "fecha_publicacion": "2026-03-14",
-      "resumen_corto": "La inflación interanual de Argentina repunta en febrero al 33,1%, aunque la mensual se mantiene en el 2,9% Infobae",
-      "ipc_interanual_detectado": null,
-      "relevancia": 44
-    },
-    {
       "titulo": "La inflación en Argentina fue del 31,4% interanual en noviembre y rompe con 18 meses de desaceleración",
       "fuente": "BioBioChile",
       "url": "https://news.google.com/rss/articles/CBMikAJBVV95cUxPU25VMXZRWVlQcTJSTW93bUhwbEd0ZE1oeXEzVDN2V0Ezc0stcU11dDNyLS1zaEpMZDhWZFMzRkhUa3MwODhhNm5TUklsWWlIeTktY3FENnA2ZlR4TnF3Q0pWMmFzOGZkd2x3clc3UGtMWFRtVjJJcU1lYWVQcEE1THctSkN3dXhGNlE4LS1lV0ZhUjBjMk5vdHRkTUc1SEJQTHpIb1NTUDF4d0ZxVE9XWVh0ZTRRRWtWRTlic0tQNnpVV2pGdmpWbjlLdnJnelhEVFNwU003TG8yTkphRUxTeGZjQ3dCai1XZkFmVkR4N0NyaHAyN2RQeDVLbFNPSWRTak9mTlVSb0stV2lYeU91cw?oc=5",
@@ -40,6 +31,15 @@
       "resumen_corto": "La inflación en Argentina fue del 31,4% interanual en noviembre y rompe con 18 meses de desaceleración BioBioChile",
       "ipc_interanual_detectado": 31.4,
       "relevancia": 42
+    },
+    {
+      "titulo": "Google News",
+      "fuente": "Infobae",
+      "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNUF9qRjFEWVZRbWtZbDJQQlFPeUFfV0NHek5jVXg1elh2VmNWODF6dWlnRmJrRmJ2dFlaUFFfVE5Yb2xmeWNFd1VYRUEwTGxLNmRzd0ZGM1R1T1djeTRDQVRyTjNQdXppcW5EaThpczV3RElndWx2ZWw1VUJsQkNBU3MzRkpsTGxWcHFRUi1ZSWoxLXpFSVd5UFFtTmtwWE1zTVE5UHhZaENKbTdZZjRFNlR6QlNSLUo3M2owXzV0V29Kc1Fwd0wyLVVxMDZVcjY5SHdJWldmQkhONjVubkZNRC1jd2I0enN2QXfSAYQCQVVfeXFMTlJ4SXpoS1NuTDhPa2pteFFRNTN2UUlfOTYtMUcyeTlUbEQ4WVRldm1uNTM4VGhxMVdZZDQ2b1B3WmVoUUs5ZFppbXVPbV9vX3o1M0R5MFc5UjR1NXNSbHZpMERDM0dyWEdlQTVsY1lVcGViUjRyanJGLV81TmRRanh1SWE4YVBaWXdSSndrTGxVVEFiWUV5Yjc2dHhrOVQ0ZmZvQXhfNFNqN3lTTG1BZGlxMlhNRzFfZGVJaTMzYTRvMHVTeUxwSG9qX1k1cmtheEktTy1oWHJFSWdWRkVsVlZxVjNpNkR5T1c1T2hWUGpfVms5bHdQZ2lNOE9QY3dMM2NUR0I?oc=5&hl=en-US&gl=US&ceid=US:en",
+      "fecha_publicacion": "2026-03-14",
+      "resumen_corto": "La inflación interanual de Argentina repunta en febrero al 33,1%, aunque la mensual se mantiene en el 2,9% Infobae",
+      "ipc_interanual_detectado": null,
+      "relevancia": 40
     },
     {
       "titulo": "Google News",

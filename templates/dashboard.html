@@ -78,6 +78,52 @@
     </div>
 
     <div class="dashboard-shell">
+
+        <!-- Panel Municipio de Pilar -->
+        <aside class="pilar-panel">
+            <div class="pilar-panel-header">
+                <span class="pilar-panel-title">Municipio de Pilar</span>
+                <span class="pilar-panel-subtitle">Finanzas locales</span>
+            </div>
+
+            <div class="pilar-entry pilar-ingreso">
+                <div class="pilar-entry-label">
+                    <span class="pilar-dot pilar-dot-green"></span>
+                    Ingresos
+                </div>
+                <div class="pilar-entry-fecha">
+                    <span class="pilar-fecha-label">Fecha</span>
+                    <span class="pilar-fecha-val" contenteditable="true" data-key="pilar-ingreso-fecha" spellcheck="false">6/4</span>
+                </div>
+                <div class="pilar-entry-monto">
+                    <span class="pilar-monto-prefix">$</span>
+                    <span class="pilar-monto-val pilar-monto-green" contenteditable="true" data-key="pilar-ingreso-monto" spellcheck="false">—</span>
+                </div>
+                <span class="pilar-edit-hint">click para editar</span>
+            </div>
+
+            <div class="pilar-entry pilar-gasto">
+                <div class="pilar-entry-label">
+                    <span class="pilar-dot pilar-dot-red"></span>
+                    Gastos
+                </div>
+                <div class="pilar-entry-fecha">
+                    <span class="pilar-fecha-label">Fecha</span>
+                    <span class="pilar-fecha-val" contenteditable="true" data-key="pilar-gasto-fecha" spellcheck="false">6/4</span>
+                </div>
+                <div class="pilar-entry-monto">
+                    <span class="pilar-monto-prefix">$</span>
+                    <span class="pilar-monto-val pilar-monto-red" contenteditable="true" data-key="pilar-gasto-monto" spellcheck="false">—</span>
+                </div>
+                <span class="pilar-edit-hint">click para editar</span>
+            </div>
+
+            <div class="pilar-balance" id="pilarBalance">
+                <span class="pilar-balance-label">Balance</span>
+                <span class="pilar-balance-val" id="pilarBalanceVal">—</span>
+            </div>
+        </aside>
+
         <div class="container executive-container">
             <header class="dashboard-header">
                 <div>
@@ -253,6 +299,7 @@
             </section>
 
 
+            {% comment %}
             <section class="accordion executive-accordion" id="dashboardDetails">
                 <div class="accordion-item detail-card" id="detalle-adrs">
                     <h2 class="accordion-header">
@@ -413,7 +460,7 @@
                 <div class="chart-wrapper">
                     <canvas id="ipcChart"></canvas>
                 </div>
-            </section>
+            {% endcomment %}
 
             <footer class="dashboard-footer">
                 <p class="footer-disclaimer">
@@ -966,6 +1013,68 @@
             document.getElementById('modalChartWrapper').classList.remove('d-none');
             document.getElementById('modalNoData').classList.add('d-none');
         });
+    </script>
+
+    <script>
+        // Panel Pilar — persistencia y balance
+        (function() {
+            const editables = document.querySelectorAll('.pilar-panel [contenteditable]');
+
+            // Cargar valores guardados
+            editables.forEach(el => {
+                const key = el.dataset.key;
+                const saved = localStorage.getItem(key);
+                if (saved) el.textContent = saved;
+            });
+
+            function parseMonto(str) {
+                const clean = str.replace(/\./g, '').replace(',', '.').replace(/[^0-9.]/g, '');
+                return parseFloat(clean);
+            }
+
+            function updateBalance() {
+                const ingEl = document.querySelector('[data-key="pilar-ingreso-monto"]');
+                const gastEl = document.querySelector('[data-key="pilar-gasto-monto"]');
+                const balVal = document.getElementById('pilarBalanceVal');
+                const balDiv = document.getElementById('pilarBalance');
+
+                const ing = parseMonto(ingEl.textContent);
+                const gas = parseMonto(gastEl.textContent);
+
+                if (!isNaN(ing) && !isNaN(gas)) {
+                    const diff = ing - gas;
+                    balVal.textContent = '$ ' + diff.toLocaleString('es-AR');
+                    balDiv.classList.remove('pilar-balance-pos', 'pilar-balance-neg');
+                    balDiv.classList.add(diff >= 0 ? 'pilar-balance-pos' : 'pilar-balance-neg');
+                } else {
+                    balVal.textContent = '—';
+                    balDiv.classList.remove('pilar-balance-pos', 'pilar-balance-neg');
+                }
+            }
+
+            // Guardar al perder foco
+            editables.forEach(el => {
+                el.addEventListener('blur', function() {
+                    localStorage.setItem(this.dataset.key, this.textContent.trim());
+                    updateBalance();
+                });
+                // Confirmar con Enter
+                el.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') { e.preventDefault(); this.blur(); }
+                });
+                // Ocultar hint al hacer foco
+                el.addEventListener('focus', function() {
+                    const hint = this.closest('.pilar-entry')?.querySelector('.pilar-edit-hint');
+                    if (hint) hint.style.opacity = '0';
+                });
+                el.addEventListener('blur', function() {
+                    const hint = this.closest('.pilar-entry')?.querySelector('.pilar-edit-hint');
+                    if (hint) hint.style.opacity = '';
+                });
+            });
+
+            updateBalance();
+        })();
     </script>
 </body>
 </html>

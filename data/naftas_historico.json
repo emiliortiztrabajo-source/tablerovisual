@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-03-30T17:48:34.213629+00:00",
+  "ultima_actualizacion": "2026-04-07T02:29:00.947589+00:00",
   "fuente": "https://surtidores.com.ar/precios/",
   "datos": [
     {
@@ -691,6 +691,13 @@
     {
       "fecha": "2026-03-01",
       "label": "Mar/26",
+      "super": 1999.0,
+      "premium": 2207.0,
+      "gasoil": 2065.0
+    },
+    {
+      "fecha": "2026-04-01",
+      "label": "Abr/26",
       "super": 1999.0,
       "premium": 2207.0,
       "gasoil": 2065.0
