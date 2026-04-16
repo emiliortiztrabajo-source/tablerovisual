@@ -18,7 +18,8 @@ from services.provincia_fondos import get_dashboard_provincia_fondos
 from services.riesgo_pais import get_dashboard_riesgo_pais
 
 
-PRIORITY_FUND_NAME = "1822 RAICES INVERSION"
+# Número de fondo del RAÍCES 24/7 | Ahorro Pesos (identificador estable de la API)
+PRIORITY_FUND_NUMERO = "4"
 
 
 def _normalize_name(value: str | None) -> str:
@@ -29,13 +30,17 @@ def _normalize_name(value: str | None) -> str:
     return " ".join(normalized.upper().split())
 
 
+def _is_priority_fund(item: dict) -> bool:
+    """Identifica el fondo prioritario por número (estable) o por nombre normalizado."""
+    if str(item.get("numero_fondo", "")).strip() == PRIORITY_FUND_NUMERO:
+        return True
+    name_normalized = _normalize_name(item.get("nombre_fondo"))
+    return "RAICES" in name_normalized and "AHORRO" in name_normalized
+
+
 def _prioritize_raices_inversion(items: list[dict]) -> list[dict]:
-    priority_items = [
-        item for item in items if _normalize_name(item.get("nombre_fondo")) == PRIORITY_FUND_NAME
-    ]
-    remaining_items = [
-        item for item in items if _normalize_name(item.get("nombre_fondo")) != PRIORITY_FUND_NAME
-    ]
+    priority_items = [item for item in items if _is_priority_fund(item)]
+    remaining_items = [item for item in items if not _is_priority_fund(item)]
     return priority_items + remaining_items
 
 
@@ -43,7 +48,7 @@ def _mark_priority(items: list[dict]) -> list[dict]:
     marked_items = []
     for item in items:
         enriched_item = dict(item)
-        enriched_item["is_priority"] = _normalize_name(item.get("nombre_fondo")) == PRIORITY_FUND_NAME
+        enriched_item["is_priority"] = _is_priority_fund(item)
         marked_items.append(enriched_item)
     return marked_items
 
@@ -141,7 +146,7 @@ def dashboard_view(request):
         "top_adrs_resumen": top_adrs_resumen,
         "top_fondos_resumen": top_fondos_resumen,
         "general_last_update": general_last_update,
-        "priority_fund_name": PRIORITY_FUND_NAME,
+        "priority_fund_name": "RAÍCES 24/7 | Ahorro Pesos",
         "ultima_actualizacion_acciones": acciones_internacionales["last_update"],
         "ipc_mensual": indec_precios["ipc"].get("variacion_mensual"),
         "ipc_periodo": indec_precios["ipc"].get("periodo"),

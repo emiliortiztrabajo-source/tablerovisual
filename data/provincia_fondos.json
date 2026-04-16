@@ -27,9 +27,10 @@
       "clase_fondo": "A"
     },
     {
-      "nombre_fondo": "1822 RAÍCES AHORRO PESOS",
+      "nombre_fondo": "RAÍCES 24/7 | Ahorro Pesos",
+      "nombre_fondo_api": "1822 RAÍCES AHORRO PESOS",
       "numero_fondo": "4",
-      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/fx00gteu1ughpxmzrii6nb3q",
+      "url_fondo": "https://www.provinciafondos.com.ar/nuestros-fondos/cuotaparte/fx00gteu1ughpxmzrii6nb3q",
       "valor_cuotaparte": 34.506432,
       "variacion_diaria": 0.0626,
       "fecha_dato": "2026-03-18",

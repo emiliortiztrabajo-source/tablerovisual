@@ -170,21 +170,24 @@ def fetch_funds_catalog(api_base_url: str) -> list[dict[str, Any]]:
     return payload.get("data", [])
 
 
-def fetch_latest_quota_part(num_fondo: Any, clase_fondo: str | None, api_base_url: str) -> dict[str, Any] | None:
+def fetch_latest_quota_parts(num_fondo: Any, clase_fondo: str | None, api_base_url: str, count: int = 2) -> list[dict[str, Any]]:
+    """Devuelve los últimos `count` registros de cuotaparte para calcular variación diaria."""
     if num_fondo in (None, "") or not clase_fondo:
-        return None
+        return []
 
     params = {
         "filters[numero_fondo][$eq]": str(num_fondo),
         "filters[clase_fondo][$eq]": clase_fondo,
         "sort[0]": "fecha:desc",
         "pagination[page]": "1",
-        "pagination[pageSize]": "1",
+        "pagination[pageSize]": str(count),
     }
-    response = _request(f"{api_base_url}/api/cuota-partes", params=params)
-    payload = response.json()
-    data = payload.get("data", [])
-    return data[0] if data else None
+    try:
+        response = _request(f"{api_base_url}/api/cuota-partes", params=params)
+        data = response.json().get("data", [])
+        return data
+    except requests.RequestException:
+        return []
 
 
 def build_fund_public_url(document_id: str | None) -> str | None:
@@ -193,7 +196,15 @@ def build_fund_public_url(document_id: str | None) -> str | None:
     return urljoin(PROVINCIA_FONDOS_URL + "/", document_id)
 
 
+def build_fund_cuotaparte_url(document_id: str | None) -> str | None:
+    """URL de la página de detalle/cuotaparte del fondo."""
+    if not document_id:
+        return None
+    return f"{PROVINCIA_FONDOS_URL}/cuotaparte/{document_id}"
+
+
 def fetch_fund_page_details(url_fondo: str | None) -> dict[str, Any]:
+    """Scrape la página de detalle (cuotaparte) para obtener nombre vigente y moneda."""
     if not url_fondo:
         return {}
     try:
@@ -202,23 +213,63 @@ def fetch_fund_page_details(url_fondo: str | None) -> dict[str, Any]:
         return {}
 
     soup = BeautifulSoup(html, "html.parser")
-    text = soup.get_text(" ", strip=True)
-    compact = re.sub(r"\s+", " ", text)
+    full_text = soup.get_text(" ", strip=True)
+    compact = re.sub(r"\s+", " ", full_text)
 
+    # ── Moneda ──────────────────────────────────────────────────────────────
     detected_currency = None
     if "dólares" in compact.lower() or "usd" in compact.lower():
         detected_currency = "USD"
     elif "pesos" in compact.lower() or "ars" in compact.lower():
         detected_currency = "ARS"
 
-    return {"moneda_detectada": detected_currency}
+    # ── Nombre vigente desde el heading ────────────────────────────────────
+    scraped_name = None
+    # 1) h1 más probable
+    h1 = soup.find("h1")
+    if h1:
+        candidate = re.sub(r"\s+", " ", h1.get_text(" ", strip=True)).strip()
+        if 3 < len(candidate) < 120:
+            scraped_name = candidate
+
+    # 2) h2 como fallback
+    if not scraped_name:
+        for tag in soup.select("h2"):
+            candidate = re.sub(r"\s+", " ", tag.get_text(" ", strip=True)).strip()
+            if 3 < len(candidate) < 120:
+                scraped_name = candidate
+                break
+
+    # 3) <title> como último recurso
+    if not scraped_name:
+        title_tag = soup.find("title")
+        if title_tag:
+            raw = title_tag.get_text(strip=True)
+            raw = re.sub(r"\s*[|–\-]\s*Provincia.*$", "", raw, flags=re.IGNORECASE).strip()
+            if 3 < len(raw) < 120:
+                scraped_name = raw
+
+    return {"moneda_detectada": detected_currency, "nombre_scrapeado": scraped_name}
+
+
+def _compute_daily_variation(quota_parts: list[dict[str, Any]]) -> float | None:
+    """Calcula la variación diaria % a partir de los dos últimos registros de cuotaparte.
+    Devuelve None si no hay datos suficientes."""
+    if len(quota_parts) < 2:
+        return None
+    v_hoy = _normalize_number(quota_parts[0].get("valor_cuota_parte"))
+    v_ayer = _normalize_number(quota_parts[1].get("valor_cuota_parte"))
+    if v_hoy is None or v_ayer is None or v_ayer == 0:
+        return None
+    return round(((v_hoy / v_ayer) - 1) * 100, 4)
 
 
 def normalize_fund_record(
     fund: dict[str, Any],
-    quota_part: dict[str, Any] | None,
+    quota_parts: list[dict[str, Any]],
     scraping_timestamp: str,
     individual_url: str | None,
+    cuotaparte_url: str | None,
     page_details: dict[str, Any],
 ) -> dict[str, Any]:
     clases = fund.get("clase_fondo") or []
@@ -236,12 +287,21 @@ def normalize_fund_record(
     elif page_details.get("moneda_detectada"):
         moneda = page_details["moneda_detectada"]
 
+    # Preferir el nombre scrapeado del detalle sobre el nombre del catálogo API
+    nombre_api = _safe_text(fund.get("name"))
+    nombre_scrapeado = page_details.get("nombre_scrapeado")
+    nombre_fondo = nombre_scrapeado if nombre_scrapeado else nombre_api
+
+    quota_part = quota_parts[0] if quota_parts else None
+    variacion_diaria = _compute_daily_variation(quota_parts)
+
     return {
-        "nombre_fondo": _safe_text(fund.get("name")),
+        "nombre_fondo": nombre_fondo,
+        "nombre_fondo_api": nombre_api,
         "numero_fondo": _safe_text(fund.get("numero_fondo")),
-        "url_fondo": individual_url,
+        "url_fondo": cuotaparte_url or individual_url,
         "valor_cuotaparte": _normalize_number((quota_part or {}).get("valor_cuota_parte")),
-        "variacion_diaria": _normalize_percentage(fund.get("variacionDiaria")),
+        "variacion_diaria": variacion_diaria,
         "fecha_dato": _normalize_date((quota_part or {}).get("fecha") or fund.get("informationAt")),
         "fecha_scraping": scraping_timestamp,
         "moneda": moneda,
@@ -267,7 +327,7 @@ def calculate_extra_metrics(numero_fondo: Any, clase_fondo: str | None, api_base
     }
     try:
         response = _request(f"{api_base_url}/api/cuota-partes", params=params)
-        series = response.json().get("data", [])
+        series = response.json().get("data", [])  # type: ignore[union-attr]
     except requests.RequestException:
         series = []
 
@@ -314,7 +374,6 @@ def calculate_extra_metrics(numero_fondo: Any, clase_fondo: str | None, api_base
 
 def scrape_provincia_fondos_with_requests() -> dict[str, Any]:
     html = fetch_primary_page_html()
-    links_from_html = extract_fund_links_from_html(html)
     api_base_url = discover_api_base_url(html)
     funds_catalog = fetch_funds_catalog(api_base_url)
     scraping_timestamp = _get_scraping_timestamp()
@@ -324,21 +383,23 @@ def scrape_provincia_fondos_with_requests() -> dict[str, Any]:
 
     for fund in funds_catalog:
         document_id = fund.get("documentId")
-        url_fondo = build_fund_public_url(document_id)
-        if links_from_html and url_fondo not in links_from_html:
-            links_from_html.append(url_fondo)
+        individual_url = build_fund_public_url(document_id)
+        cuotaparte_url = build_fund_cuotaparte_url(document_id)
 
-        page_details = fetch_fund_page_details(url_fondo)
+        # Scrape nombre vigente y moneda desde la página de detalle/cuotaparte
+        page_details = fetch_fund_page_details(cuotaparte_url or individual_url)
 
         clases = fund.get("clase_fondo") or []
         clase_fondo = clases[0].get("clase") if clases else None
-        quota_part = fetch_latest_quota_part(fund.get("numero_fondo"), clase_fondo, api_base_url)
+        # Pedir 2 registros para calcular variación diaria real
+        quota_parts = fetch_latest_quota_parts(fund.get("numero_fondo"), clase_fondo, api_base_url, count=2)
 
         normalized = normalize_fund_record(
             fund=fund,
-            quota_part=quota_part,
+            quota_parts=quota_parts,
             scraping_timestamp=scraping_timestamp,
-            individual_url=url_fondo,
+            individual_url=individual_url,
+            cuotaparte_url=cuotaparte_url,
             page_details=page_details,
         )
         fondos.append(normalized)
