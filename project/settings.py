@@ -30,7 +30,9 @@ _env_allowed_hosts = {
     if value.strip()
 }
 
-ALLOWED_HOSTS = sorted(_default_allowed_hosts | _env_allowed_hosts)
+_railway_hosts = {".railway.app", ".up.railway.app"}
+
+ALLOWED_HOSTS = sorted(_default_allowed_hosts | _env_allowed_hosts | _railway_hosts)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
