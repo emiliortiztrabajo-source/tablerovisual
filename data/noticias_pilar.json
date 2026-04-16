@@ -1,51 +1,51 @@
 {
-  "ultima_actualizacion": "2026-04-06T23:27:30-03:00",
+  "ultima_actualizacion": "2026-04-07T23:17:16-03:00",
   "cantidad_noticias": 5,
-  "tema_dominante": "gobierno",
+  "tema_dominante": "general",
   "noticias": [
     {
-      "titulo": "El intendente Achával destacó la labor de los merenderos – Pilar de Todos",
-      "fuente": "Pilar de Todos",
-      "url": "https://www.pilardetodos.com.ar/secciones/noticias/sociedad/el-intendente-achaval-destaco-la-labor-de-los-merenderos",
-      "fecha_publicacion": "2026-04-06",
-      "resumen_corto": "Visitó “Mana” de Presidente Derqui, donde se reunió con sus responsables.",
-      "tema": "gobierno",
-      "relevancia": 78
+      "titulo": "Temor por el ataque de un pitbull en un barrio de Pilar",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/informacion-general/temor-el-ataque-un-pitbull-un-barrio-pilar-n5468939",
+      "fecha_publicacion": "2026-04-07",
+      "resumen_corto": "Ocurrió en Nuestra Señora del Pilar, cercano a la ruta 25. Agredió a otro perro en la vía pública. Vecinos dicen que ya sucedió lo mismo con otros animales e incluso contra personas. VIDEO.",
+      "tema": "general",
+      "relevancia": 59
     },
     {
-      "titulo": "Pilar: detuvieron a 53 personas; tres tenían pedido de captura activo – Pilar de Todos",
-      "fuente": "Pilar de Todos",
-      "url": "https://www.pilardetodos.com.ar/secciones/noticias/policiales/pilar-detuvieron-a-53-personas-y-tres-tenian-pedido-de-captura-activo",
-      "fecha_publicacion": "2026-04-06",
-      "resumen_corto": "Se llevaron a cabo 15 operativos y se identificaron más de 5.500 personas.",
+      "titulo": "Lanzaron la oferta deportiva para el Club Municipal Del Viso",
+      "fuente": "Pilar a Diario",
+      "url": "https://www.pilaradiario.com/la-liga/lanzaron-la-oferta-deportiva-el-club-municipal-del-viso-n5468934",
+      "fecha_publicacion": "2026-04-07",
+      "resumen_corto": "Habrá más de una decena de actividades en el predio de Polonia 6889. “Hay propuestas para todas las edades”, destacó Fernando Trillo.",
       "tema": "seguridad",
-      "relevancia": 89
+      "relevancia": 69
     },
     {
-      "titulo": "Pilar: robaron una moto y fueron detenidos tras un seguimiento por cámaras de seguridad – Pilar de Todos",
+      "titulo": "La Comedia del Pilar estrena “La niña que fue Cyrano” en Torrente – Pilar de Todos",
       "fuente": "Pilar de Todos",
-      "url": "https://www.pilardetodos.com.ar/secciones/noticias/policiales/pilar-robaron-una-moto-y-fueron-detenidos-tras-un-seguimiento-por-camaras-de-seguridad",
-      "fecha_publicacion": "2026-04-06",
-      "resumen_corto": "El monitoreo en tiempo real permitió localizar a los sospechosos y recuperar el vehículo.",
-      "tema": "seguridad",
+      "url": "https://www.pilardetodos.com.ar/secciones/noticias/cultura/la-comedia-del-pilar-estrena-la-nina-que-fue-cyrano-en-torrente",
+      "fecha_publicacion": "2026-04-07",
+      "resumen_corto": "El grupo presenta su segundo espectáculo de la temporada 2026 con funciones durante abril en Pilar.",
+      "tema": "obras",
       "relevancia": 61
     },
     {
-      "titulo": "Achával destacó el rol de las mujeres que llevan adelante los merenderos",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/informacion-general/achaval-destaco-el-rol-las-mujeres-que-llevan-adelante-los-merenderos-n5468899",
-      "fecha_publicacion": "2026-04-06",
-      "resumen_corto": "En Rivera Villate Achával destacó el rol de las mujeres que llevan adelante los merenderos Fútbol-Conmebol El fútbol de Pilar juega en las copas internacionales",
+      "titulo": "Costureras Solidarias entregaron útiles escolares en comedores y merenderos de Pilar – Pilar de Todos",
+      "fuente": "Pilar de Todos",
+      "url": "https://www.pilardetodos.com.ar/secciones/noticias/sociedad/costureras-solidarias-entregaron-utiles-escolares-en-comedores-y-merenderos-de-pilar",
+      "fecha_publicacion": "2026-04-07",
+      "resumen_corto": "Las voluntarias llegaron con mochilas, cartucheras, libros y útiles varios.",
       "tema": "gobierno",
-      "relevancia": 79
+      "relevancia": 82
     },
     {
-      "titulo": "El fútbol de Pilar juega en las copas internacionales",
-      "fuente": "Pilar a Diario",
-      "url": "https://www.pilaradiario.com/la-liga/el-futbol-pilar-juega-las-copas-internacionales-n5468897",
-      "fecha_publicacion": "2026-04-06",
-      "resumen_corto": "Arranca la Libertadores con Camilo Rey (Boca), Martín Gómez (U. Católica de Chile) y Augusto Lotti (Platense). Benjamín Figueredo e Ignacio Peluffo (Tigre) anotados para la Sudamericana.",
-      "tema": "educacion",
+      "titulo": "Dos nuevas unidades ya prestan servicio en Bomberos de Pilar – Pilar de Todos",
+      "fuente": "Pilar de Todos",
+      "url": "https://www.pilardetodos.com.ar/secciones/noticias/sociedad/dos-nuevas-unidades-ya-prestan-servicio-en-bomberos-de-pilar",
+      "fecha_publicacion": "2026-04-07",
+      "resumen_corto": "Se trata de un camión de rescate pesado y otro de primera intervención. Fueron incorporados para reforzar la cobertura en el distrito.",
+      "tema": "servicios",
       "relevancia": 57
     }
   ]
